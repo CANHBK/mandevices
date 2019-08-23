@@ -1,0 +1,12 @@
+overwrite: true
+schema: './src/graphql/**/*.ts'
+documents: null
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      federation: true
+      noSchemaStitching: true
+      contextType: "../apollo#ApolloContext"

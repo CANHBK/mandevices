@@ -1,0 +1,17 @@
+FROM node:slim
+
+WORKDIR /usr/app
+
+COPY package*.json ./
+
+RUN npm i
+
+ADD ./wait /wait
+
+RUN chmod +x /wait
+
+COPY . .
+
+EXPOSE 4000
+
+CMD /wait && npm run dev

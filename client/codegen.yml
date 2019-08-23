@@ -1,0 +1,23 @@
+schema: "http://localhost:4000/graphql"
+documents:
+  - ./src/docs/**/*.{ts,tsx,graphql}
+  - ./src/*.{ts,tsx,graphql}
+  - ./src/api/**/*.{ts,tsx,graphql}
+  - ./src/components/**/*.{ts,tsx,graphql}
+overwrite: true
+generates:
+  ./src/generated/apollo-react-hook.generated.tsx:
+    config:
+      noNamespaces: true
+      noSchemaStitching: true
+      withHooks: true
+      withComponent: false
+      withHOC: false
+      hooksImportFrom: "@apollo/react-hooks"
+      # contextType: "../context#MyContext"
+    plugins:
+      - add: "/* tslint:disable */"
+      - typescript
+      - typescript-resolvers
+      - typescript-operations
+      - typescript-react-apollo

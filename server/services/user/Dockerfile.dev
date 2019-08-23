@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR /usr/app
+
+COPY package*.json ./
+
+RUN npm i
+
+COPY . .
+
+RUN chmod +x wait
+
+EXPOSE 7000
+
+CMD wait && npm run dev
