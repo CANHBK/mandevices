@@ -1,0 +1,22 @@
+{
+	"name": "@mandevices/desktop",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc",
+		"rebuild": "electron-rebuild",
+		"watch": "tsc -w",
+		"lint": "tslint -c tslint.json -p tsconfig.json",
+		"start": "npm run build && electron ./dist/src/main.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/serialport": "^7.0.4",
+		"electron": "^6.0.4",
+		"electron-rebuild": "^1.8.6",
+		"serialport": "^7.1.5",
+		"typescript": "^3.5.3"
+	}
+}

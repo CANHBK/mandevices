@@ -1,0 +1,34 @@
+version: '3'
+services:
+            user:
+                        image: mandevicesiot/mandevices-service-user:latest
+                        ports:
+                                    - '7000:7000'
+                        environment:
+                                    DATABASE_CONNECTION_STRING: 'mongodb+srv://canhiot:mandevices@mandevices-staging-42wjh.mongodb.net/test?retryWrites=true&w=majority'
+                                    PORT: 7000
+            post:
+                        image: mandevicesiot/mandevices-service-post:latest
+                        ports:
+                                    - '7001:7000'
+                        environment:
+                                    PORT: 7000
+            nginx:
+                        image: mandevicesiot/mandevices-proxy:latest
+                        ports:
+                                    - 80:80
+                        environment:
+                                    WAIT_HOSTS: client:3000, server:4000
+            client:
+                        image: mandevicesiot/mandevices-web
+                        ports:
+                                    - 3000:3000
+                        environment:
+                                    REACT_APP_SERVER_PORT: 4000
+            server:
+                        image: mandevicesiot/mandevices-server
+                        ports:
+                                    - '4000:4000'
+                        environment:
+                                    PORT: 4000
+                                    WAIT_HOSTS: user:7000, post:7000
