@@ -1,10 +1,12 @@
-import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
+
 import Adapter from 'enzyme-adapter-react-16';
+import Personals from '../../personals';
+import React from 'react';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import Personals from '../';
+
 
 /**
  * Factory function to create a ShallowWrapper for the App component

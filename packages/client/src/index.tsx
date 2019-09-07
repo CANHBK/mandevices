@@ -1,14 +1,19 @@
+import './index.css';
+
+import * as serviceWorker from './serviceWorker';
+
+import { ApolloProvider } from '@apollo/react-hooks';
+import App from './controller';
+import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { ApolloProvider } from '@apollo/react-hooks';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { client } from './apollo';
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
-		<App />
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
 	</ApolloProvider>,
 	document.getElementById('root')
 );
