@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
+import HeaderComponent from '../components/header';
 
 const HomePresentations = () => {
-	return (
-		<div>
-			trang chu
-		</div>
-	)
-}
+	return <HeaderComponent />;
+};
 
-export default HomePresentations
+export default HomePresentations;
