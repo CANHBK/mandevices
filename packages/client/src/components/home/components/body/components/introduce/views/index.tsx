@@ -1,0 +1,145 @@
+import React from 'react';
+import { Character } from './ui';
+import chibi_1 from '../asset/chibi_1.jpg';
+import chibi_2 from '../asset/chibi_2.jpg';
+import chibi_3 from '../asset/chibi_3.jpg';
+import chibi_4 from '../asset/chibi_4.jpg';
+import chibi_5 from '../asset/chibi_5.jpg';
+import chibi_6 from '../asset/chibi_6.jpg';
+import chibi_7 from '../asset/chibi_7.jpg';
+const IntroPresentations = () => {
+	return (
+        <Character>
+					<h2>Character</h2>
+					<div>
+						<ul>
+							<li>
+								<img
+									src={
+										chibi_1
+									}
+								/>
+							</li>
+							<li>
+								<img
+									src={
+										chibi_2
+									}
+								/>
+							</li>
+							<li>
+								<img
+									src={
+										chibi_3
+									}
+								/>
+							</li>
+							<li>
+								<img
+									src={
+										chibi_4
+									}
+								/>
+							</li>
+							<li>
+								<img
+									src={
+										chibi_5
+									}
+								/>
+							</li>
+							<li>
+								<img
+									src={
+										chibi_6
+									}
+								/>
+							</li>
+							<li>
+								<img
+									src={
+										chibi_7
+									}
+								/>
+							</li>
+							<div>
+								<p>
+									Là
+									một
+									Anh
+									Hùng,
+									người
+									chơi
+									sử
+									dụng
+									các
+									công
+									cụ
+									để
+									hỗ
+									trợ
+									vị
+									tướng
+									của
+									mình
+									trên
+									chiến
+									trường.
+									Ngọc
+									bổ
+									trợ,
+									bảng
+									bổ
+									trợ
+									và
+									phép
+									bổ
+									trợ
+									cho
+									phép
+									người
+									chơi
+									tùy
+									chỉnh
+									vị
+									tướng
+									của
+									mình
+									phù
+									hợp
+									với
+									phong
+									cách
+									chơi
+									của
+									bản
+									thân.
+								</p>
+								<h4>
+									Liên
+									Minh
+									Huyền
+									Thoại
+									cho
+									người
+									chơi
+									sự
+									lựa
+									chọn
+									rộng
+									rãi
+									với
+									các
+									tướng.
+								</h4>
+								<h5>
+									Xem
+									thêm>>
+								</h5>
+							</div>
+						</ul>
+					</div>
+				</Character>
+    )
+}
+export default IntroPresentations
