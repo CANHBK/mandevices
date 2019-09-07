@@ -1,3 +1,4 @@
+import GlobalStyled from './styled';
 import { IRoute } from '../interface';
 import React from 'react';
 import { Route } from 'react-router-dom';
@@ -9,6 +10,7 @@ interface IAppPresentations {
 const AppPresentations: React.FC<IAppPresentations> = ({ routes }) => {
 	return (
 		<React.Fragment>
+			<GlobalStyled />
 			{routes.map(
 				({
 					id,
