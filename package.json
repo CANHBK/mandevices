@@ -1,6 +1,7 @@
 {
 	"private": true,
 	"scripts": {
+		"react":"npx lerna run build:react",
 		"setup": "npx lerna bootstrap",
 		"mobile": "cd packages/mobile && yarn start",
 		"restart": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans",
