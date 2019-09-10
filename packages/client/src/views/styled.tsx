@@ -1,6 +1,4 @@
-import { createGlobalStyle } from '../theme-styled-component';
-
-
+import { createGlobalStyle } from 'styled-components/macro';
 
 export default createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');

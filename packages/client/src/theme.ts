@@ -14,3 +14,6 @@ export const theme = {
 		appBar: '56px'
 	}
 };
+
+
+export type Theme = typeof theme

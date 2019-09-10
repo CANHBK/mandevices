@@ -1,5 +1,6 @@
 {
 	"workbench.tree.indent": 40,
 	"editor.autoIndent": false,
-	"editor.detectIndentation": false
+	"editor.detectIndentation": false,
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }

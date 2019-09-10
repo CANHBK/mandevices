@@ -1,17 +1,27 @@
-import React from 'react';
-import HeaderComponent from '../components/header';
-import BodyComponent from '../components/body';
-import BottomComponent from '../components/bottom';
+import { Route, Switch } from 'react-router-dom';
 
+import BottomComponent from './footer';
+import HeaderComponent from './header';
+import React from 'react';
+import routes from '../routes';
 
 const HomePresentations = () => {
 	return (
-		<React.Fragment>
+		<>
 			<HeaderComponent />
-			<BodyComponent/>
-            <BottomComponent/>
-            
-		</React.Fragment>
+			<Switch>
+			{routes.map(({ uri, component, id }) => (
+				<Route
+					path={uri}
+					component={
+						component
+					}
+					key={id}
+				/>
+			))}
+			</Switch>
+			<BottomComponent />
+		</>
 	);
 };
 
