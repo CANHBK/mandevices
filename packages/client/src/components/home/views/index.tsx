@@ -10,15 +10,29 @@ const HomePresentations = () => {
 		<>
 			<HeaderComponent />
 			<Switch>
-			{routes.map(({ uri, component, id }) => (
-				<Route
-					path={uri}
-					component={
-						component
-					}
-					key={id}
-				/>
-			))}
+				{routes.map(
+					({
+						uri,
+						component,
+						id,
+						exact
+					}) => (
+						<Route
+							exact={
+								exact
+							}
+							path={
+								uri
+							}
+							component={
+								component
+							}
+							key={
+								id
+							}
+						/>
+					)
+				)}
 			</Switch>
 			<BottomComponent />
 		</>
