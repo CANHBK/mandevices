@@ -1,0 +1,1 @@
+web: node packages/server2/build/index.js
