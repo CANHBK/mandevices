@@ -12,12 +12,20 @@ const HomePageComponent = Loadable({
 	loading: () => <UiLoading />
 });
 
+const ProfileComponent = Loadable({
+	loader: () => import('../components/profile'),
+	loading: () => <UiLoading />
+});
+
 export const MEMBERS_URI = '/members';
+
+export const PROFILE_URI = '/members/profile/:id';
 
 export const navRoutes: IRoute[] = [
 	{
 		id: Math.random(),
 		name: 'Thành viên',
+		exact: true,
 		uri: MEMBERS_URI,
 		component: MembersComponent
 	},
@@ -25,26 +33,18 @@ export const navRoutes: IRoute[] = [
 		id: Math.random(),
 		name: 'Trang chủ',
 		uri: '/',
+		exact: true,
 		component: HomePageComponent
-	},
-	{
-		id: Math.random(),
-		name: 'Community',
-		uri: '/',
-		component: () => <div>abc</div>
-	},
-	{
-		id: Math.random(),
-		name: 'Videos',
-		uri: '/',
-		component: () => <div>abc</div>
-	},
-	{
-		id: Math.random(),
-		name: 'Games',
-		uri: '/',
-		component: () => <div>abc</div>
 	}
 ];
 
-export default [...navRoutes]
+const routes: IRoute[] = [
+	{
+		id: Math.random(),
+		name: 'Trang cá nhân',
+		uri: PROFILE_URI,
+		component: ProfileComponent
+	}
+];
+
+export default [...navRoutes, ...routes];

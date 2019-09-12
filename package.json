@@ -1,12 +1,16 @@
 {
 	"private": true,
 	"scripts": {
+		"i-server": "cd packages/server2 && npm install",
+		"react": "npx lerna run build:react",
 		"setup": "npx lerna bootstrap",
 		"mobile": "cd packages/mobile && yarn start",
 		"restart": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans",
 		"dev": "docker-compose up --build",
 		"st": "docker-compose -f docker-compose.staging.yml up --build",
-		"stop:": "docker-compose stop"
+		"stop:": "docker-compose stop",
+		"build-ts": "lerna run build-ts",
+		"postinstall": "npm run i-server && npm run build-ts"
 	},
 	"devDependencies": {
 		"@types/react-router-dom": "4.3.5",

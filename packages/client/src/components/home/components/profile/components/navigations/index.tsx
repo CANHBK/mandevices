@@ -1,4 +1,4 @@
-import { Box } from '../../shared/Box';
+import { Box } from '../../../../../../shared/Box';
 import React from 'react'
 
 const ProfileNavigations = () => {
