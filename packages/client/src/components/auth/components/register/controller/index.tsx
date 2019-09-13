@@ -2,7 +2,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 
 import { LOGIN_URI } from 'components/auth/routes';
 import React from 'react';
-import RegisterPresentational from '../views';
+import MyForm from '../views';
 
 const RegisterController: React.FC<RouteComponentProps> = ({ history }) => {
 	const course: number[] = [];
@@ -10,7 +10,7 @@ const RegisterController: React.FC<RouteComponentProps> = ({ history }) => {
 		course.push(i);
 	}
 	return (
-		<RegisterPresentational
+		<MyForm
 			onLoginClick={() => history.push(LOGIN_URI)}
 			courses={course}
 		/>

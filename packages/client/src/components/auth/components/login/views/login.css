@@ -1,0 +1,11 @@
+.fieldLogin {
+    border-left:none;
+    border-top:none;
+    border-right:none;
+    width:280px;
+    margin-top:20px;
+}
+
+.field:focus {
+    border-bottom:#1890ff solid 2px;
+}
