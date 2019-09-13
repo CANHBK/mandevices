@@ -8,6 +8,7 @@ export const navRoutes: IRoute[] = [
 	{
 		id: Math.random(),
 		uri: PROFILE_HOME_URI,
+		exact: false,
 		component: HomeComponent
 	}
 ];

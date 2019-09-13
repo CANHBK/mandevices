@@ -42,6 +42,7 @@ const routes: IRoute[] = [
 	{
 		id: Math.random(),
 		name: 'Trang cá nhân',
+		exact:false,
 		uri: PROFILE_URI,
 		component: ProfileComponent
 	}
