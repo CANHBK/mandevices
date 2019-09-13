@@ -1,12 +1,3 @@
-import { Box } from '../../../../../../shared/Box';
-import React from 'react'
+import C from './controller';
 
-const ProfileHome = () => {
-	return (
-		<Box>
-			trang chu
-		</Box>
-	)
-}
-
-export default ProfileHome
+export default C;
