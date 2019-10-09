@@ -1,15 +1,17 @@
 import * as React from "react";
-import { ApolloProvider } from '@apollo/react-hooks';
-import { Routes } from "./routes";
-import { client } from "./apollo";
+
 import {
-	createSwitchNavigator,
 	createAppContainer,
-	createDrawerNavigator
+	createDrawerNavigator,
+	createSwitchNavigator
 } from 'react-navigation';
+
+import { ApolloProvider } from '@apollo/react-hooks';
 import { AuthenticationScreen } from './authentication/Authentication.index';
 import HomeScreen from './home/Home.index';
+import { client } from "./apollo";
 
+// import { Routes } from "./routes";
 
 
 const AppDrawerNavigator = createDrawerNavigator({

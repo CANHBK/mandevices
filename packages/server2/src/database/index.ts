@@ -12,7 +12,7 @@ const client = new MongoClient(url, {
 	useUnifiedTopology: true
 });
 
-export const getDbConnection = (): Promise<mongodb.Db> => {
+export const dbConnect = (): Promise<mongodb.Db> => {
 	return new Promise(resolve => {
 		client.connect(err => {
 			assert.strictEqual(null, err);
@@ -22,7 +22,11 @@ export const getDbConnection = (): Promise<mongodb.Db> => {
 	});
 };
 
-if (process.env.NODE_ENV === 'development') {
-	const seed = require('./seed');
-	seed.default();
-}
+// if (process.env.NODE_ENV === 'development') {
+// 	const seed = require('./seed');
+// 	try {
+// 		seed.default();
+// 	} catch (error) {
+// 		console.log('error', error);
+// 	}
+// }

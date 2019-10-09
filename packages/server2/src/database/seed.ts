@@ -1,12 +1,15 @@
+import { dbConnect } from '.';
 import faker from 'faker/locale/vi';
-import { getDbConnection } from '.';
 
 const users: User[] = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 20; i++) {
 	const user: User = {
-		firstName: faker.name.findName(),
-		lastName: faker.name.lastName(),
+		name:
+			faker.name.findName() +
+			' ' +
+			faker.name.lastName(),
+
 		email: faker.internet.email()
 	};
 
@@ -14,18 +17,17 @@ for (let i = 0; i < 100; i++) {
 }
 
 interface User {
-	firstName: String;
-	lastName: String;
+	name: String;
 	email: String;
 }
 
 export default async () => {
-	const db = await getDbConnection();
+	const db = await dbConnect();
 
 	const hasDocuments = await db.collection('users').countDocuments();
 	if (hasDocuments || !users.length) {
 		return;
 	}
 
-	db.collection('users').insertMany(users);
+	await db.collection('users').insertMany(users);
 };

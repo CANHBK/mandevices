@@ -7,22 +7,30 @@
 		"start": "node build/index.js",
 		"build-ts": "tsc",
 		"dev": "env-cmd -f .env nodemon --exec ts-node src/index.ts",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"generate": "graphql-codegen --config codegen.yml"
 	},
 	"author": "Nguyen Viet Canh",
 	"license": "ISC",
 	"dependencies": {
+		"@sendgrid/mail": "6.4.0",
 		"apollo-server-express": "^2.9.3",
 		"bcryptjs": "2.4.3",
 		"express": "4.17.1",
 		"graphql": "14.5.4",
+		"migrate": "1.6.2",
 		"mongodb": "3.3.2",
 		"reflect-metadata": "0.1.13",
 		"type-graphql": "0.17.5"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "^1.8.0",
+		"@graphql-codegen/introspection": "1.8.0",
+		"@graphql-codegen/typescript": "1.8.0",
+		"@graphql-codegen/typescript-resolvers": "1.8.0",
+		"@types/bcryptjs": "^2.4.2",
 		"@types/faker": "4.1.5",
-		"@types/mongodb": "^3.3.1",
+		"@types/mongodb": "3.3.1",
 		"@types/node": "12.7.5",
 		"env-cmd": "10.0.1",
 		"faker": "4.1.0",
