@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"i-server": "cd packages/server2 && npm install",
+		"i-server": "cd packages/server2 && npm i",
 		"react": "npx lerna run build:react",
 		"setup": "npx lerna bootstrap",
 		"mobile": "cd packages/mobile && yarn start",
