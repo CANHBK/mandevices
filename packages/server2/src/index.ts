@@ -10,7 +10,7 @@ const main = async () => {
 
 	apolloServer.applyMiddleware({ app });
 
-	app.listen(process.env.PORT || 5000, () => {
+	app.listen({ port: process.env.PORT || 5000 }, () => {
 		console.log('server started');
 	});
 };
