@@ -89,6 +89,7 @@ export const getApolloServer = async () => {
 		typeDefs,
 		// @ts-ignore
 		resolvers,
+		playground:true,
 		context: () => {
 			return { dbClient };
 		}
