@@ -1,9 +1,10 @@
-import { ApolloServer, gql } from 'apollo-server-express';
 import { Resolvers, User } from '../generated/graphql';
 import { genSalt, hash } from 'bcryptjs';
 import { send, setApiKey } from '@sendgrid/mail';
 
+import { ApolloServer } from 'apollo-server-express';
 import { dbConnect } from '../database';
+import { typeDefs } from "./type-def"
 
 setApiKey(process.env.SENDGRID_API_KEY!);
 const msg = {
@@ -24,24 +25,7 @@ const sendEmail = async () => {
 	
 // sendEmail();
 
-const typeDefs = gql`
-	type User {
-		id: ID
-		name: String
-		email: String
-	}
-	type Mutation {
-		register(
-			name: String!
-			email: String!
-			password: String!
-			course: Int!
-		): User
-	}
-	type Query {
-		users: [User!]!
-	}
-`;
+
 
 const resolvers: Resolvers = {
 	User: {
