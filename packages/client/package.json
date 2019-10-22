@@ -67,7 +67,6 @@
 		"image": "docker build -t mandevicesiot/mandevices-web:latest .",
 		"dev": "run-p start generate",
 		"start": "react-app-rewired start",
-		"build:react": "npm run prebuild && npm run build",
 		"prebuild": "npm i",
 		"build": "react-app-rewired build",
 		"test": "react-app-rewired test",

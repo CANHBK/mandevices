@@ -2,7 +2,7 @@
 	"private": true,
 	"scripts": {
 		"i-server": "cd packages/server2 && npm i",
-		"react": "npx lerna run build:react",
+		"react": "npx lerna run build",
 		"setup": "npx lerna bootstrap",
 		"mobile": "cd packages/mobile && yarn start",
 		"restart": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans",
