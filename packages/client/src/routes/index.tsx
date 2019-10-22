@@ -1,4 +1,3 @@
-import HomeComponent from '../components/home';
 import { IRoute } from '../interface';
 import Loadable from 'react-loadable';
 import React from 'react';
@@ -8,10 +7,13 @@ const AuthComponent = Loadable({
 	loader: () => import('../components/auth'),
 	loading: () => <UiLoading />
 });
-
+const HomeComponent = Loadable({
+	loader: () => import('../components/home'),
+	loading: () => <UiLoading />
+});
 
 export const AUTH_URI = `/auth`;
-
+export const HOME_URI = `/`;
 
 const routes: IRoute[] = [
 	{
@@ -22,7 +24,7 @@ const routes: IRoute[] = [
 	},
 	{
 		id: Math.random(),
-		uri: '/',
+		uri: HOME_URI,
 		exact: false,
 		component: HomeComponent
 	}

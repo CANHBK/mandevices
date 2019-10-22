@@ -1,0 +1,81 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type AuthenticationInfo {
+    token: String
+    user: User
+}
+
+type Device {
+    id: ID!
+}
+
+type GuardingAssignment {
+    id: ID
+    name: String
+    subscribers(where: SubscribersWhereInput): [GuardingAssignmentSubscriber]
+}
+
+type GuardingAssignmentBySession {
+    afternoon: [User]!
+    morning: [User]!
+}
+
+type GuardingAssignmentRegistration {
+    id: ID
+}
+
+type GuardingAssignmentSubscriber {
+    session: [Session]
+    user: User
+}
+
+type Mutation {
+    facebookLogin(avatar: String!, email: String!, name: String!): AuthenticationInfo
+    login(email: String!, password: String!): AuthenticationInfo
+    register(course: Int!, email: String!, name: String!, password: String!): User
+    registerGuardingAssignment(day: DayOfWeeks!, session: [Session]): GuardingAssignmentRegistration
+    trucLab(day: DayOfWeeks, session: Session): Boolean
+}
+
+type Query {
+    device(id: ID!): Device
+    devices: [Device!]!
+    guardingAssignment(where: GuardingAssignmentWhereUniqueInput!): GuardingAssignment
+    guardingAssignments: [GuardingAssignment!]!
+    users: [User!]!
+}
+
+type User {
+    avatar: String
+    email: String
+    id: ID
+    name: String
+}
+
+enum DayOfWeeks {
+    friday
+    monday
+    saturday
+    sunday
+    thursday
+    tuesday
+    wednesday
+}
+
+enum Session {
+    CHIEU
+    SANG
+}
+
+input GuardingAssignmentWhereUniqueInput {
+    id: ID!
+}
+
+input SubscribersWhereInput {
+    session: [Session]
+}

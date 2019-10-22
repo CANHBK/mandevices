@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Mandevices</string>
+    <string name="email">Email</string>
+    <string name="fullName">Họ và tên</string>
+    <string name="password">Mật khẩu</string>
+    <string name="repeatPassword">Nhập lại mật khẩu</string>
+    <string name="register">Đăng kí</string>
+    <string name="facebook_app_id">288803671848353</string>
+    <string name="fb_login_protocol_scheme">fb288803671848353</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="course">Khóa</string>
+    <string name="account">Tài khoản</string>
+    <string name="member">Thành viên</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="login">Đăng nhập</string>
+    <string name="mandevices">Mandevices</string>
+    <string name="facebook">Facebook</string>
+    <string name="monday">Thứ hai</string>
+    <string name="morning">Sáng</string>
+    <string name="afternoon">Chiều</string>
+</resources>

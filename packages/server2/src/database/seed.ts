@@ -1,33 +1,26 @@
+import { Seeder } from 'mongo-seeding';
 import { dbConnect } from '.';
 import faker from 'faker/locale/vi';
+import { resolve } from 'path';
 
-const users: User[] = [];
+const seeder = new Seeder({
+	database: 'mongodb://127.0.0.1:27017/mandevices'
+});
 
-for (let i = 0; i < 20; i++) {
-	const user: User = {
-		name:
-			faker.name.findName() +
-			' ' +
-			faker.name.lastName(),
-
-		email: faker.internet.email()
-	};
-
-	users.push(user);
-}
-
-interface User {
-	name: String;
-	email: String;
-}
-
-export default async () => {
-	const db = await dbConnect();
-
-	const hasDocuments = await db.collection('users').countDocuments();
-	if (hasDocuments || !users.length) {
-		return;
+const collections = seeder.readCollectionsFromPath(
+	resolve('./src/database/data'),
+	{
+		extensions: ['ts'],
+	transformers:[
+		Seeder.Transformers.replaceDocumentIdWithUnderscoreId
+	]
 	}
-
-	await db.collection('users').insertMany(users);
+);
+export const seed = async () => {
+	try {
+		await seeder.import(collections);
+	} catch (err) {
+		console.log('err', err);
+		// Handle errors
+	}
 };

@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'src/**/type-def.ts'
+schema: './src/**/schema.ts'
 documents: null
 generates:
             src/generated/graphql.ts:
@@ -9,6 +9,9 @@ generates:
                         config:
                                     contextType: ../context#Context
                                     skipTypename: true
-            ./graphql.schema.json:
+            ../android/app/src/main/graphql/bkhn.mandevices.iot.mandevices/schema.json:
+                        plugins:
+                                    - 'introspection'
+            ./schema.json:
                         plugins:
                                     - 'introspection'

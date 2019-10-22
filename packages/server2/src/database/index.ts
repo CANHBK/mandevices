@@ -1,5 +1,6 @@
 import assert from 'assert';
 import mongodb from 'mongodb';
+import { seed } from './seed';
 
 const MongoClient = mongodb.MongoClient;
 
@@ -22,6 +23,7 @@ export const dbConnect = (): Promise<mongodb.Db> => {
 	});
 };
 
+// seed()
 // if (process.env.NODE_ENV === 'development') {
 // 	const seed = require('./seed');
 // 	try {

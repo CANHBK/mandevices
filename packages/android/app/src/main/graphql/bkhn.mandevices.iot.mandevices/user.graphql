@@ -1,0 +1,43 @@
+mutation RegisterMutation($name: String!, $email: String!, $course: Int!, $password: String!){
+    register(name: $name, email: $email,password: $password,course: $course){
+        email
+    }
+}
+
+query Users{
+    users{
+        id
+        email
+        name
+    }
+}
+
+query GuardRegistration{
+    guardingAssignments{
+        id
+        name
+    }
+}
+
+#query  GuardRegistrationDetail($id:ID!){
+#    guardingAssignment(id:$id ){
+#        id
+#        name
+#    }
+#}
+
+query GuardingAssignment(
+    $guardingAssignmentWhere: GuardingAssignmentWhereUniqueInput!
+    $subscribersWhere: SubscribersWhereInput
+) {
+    guardingAssignment(where: $guardingAssignmentWhere) {
+        name
+        subscribers(where: $subscribersWhere) {
+            user {
+                id
+                name
+            }
+            session
+        }
+    }
+}

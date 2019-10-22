@@ -1,14 +1,29 @@
-import { Button } from 'antd';
 import React from 'react';
 
 interface ITopHeaderPresentational {
-	onLoginClick: () => void
+	onLoginClick: () => void;
+	isLogin: boolean;
+	onLogoutClick :()=>void;
 }
-const TopHeaderPresentational: React.FC<ITopHeaderPresentational> = ({onLoginClick}) => {
+const TopHeaderPresentational: React.FC<ITopHeaderPresentational> = ({
+	onLoginClick,
+	isLogin = false,
+	onLogoutClick
+}) => {
+	const handleLogin = () => {
+		onLoginClick();
+	};
+
 	return (
-		<div>
-			<Button onClick={onLoginClick}>Đăng nhập</Button>
-		</div>
+		<>
+			{isLogin ? (
+				<button onClick={onLogoutClick}>Đăng xuất</button>
+			) : (
+				<button onClick={handleLogin}>
+					Đăng nhập
+				</button>
+			)}
+		</>
 	);
 };
 

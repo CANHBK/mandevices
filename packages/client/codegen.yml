@@ -1,12 +1,11 @@
-schema: "http://localhost:4000/graphql"
+schema:
+  - ../server2/src/**/schema.ts
 documents:
-  - ./src/docs/**/*.{ts,tsx,graphql}
-  - ./src/*.{ts,tsx,graphql}
-  - ./src/api/**/*.{ts,tsx,graphql}
-  - ./src/components/**/*.{ts,tsx,graphql}
+  - ./src/**/api/**/*.{ts,tsx,graphql}
 overwrite: true
 generates:
   ./src/generated/apollo-react-hook.generated.tsx:
+    schema: ./src/apollo.tsx
     config:
       noNamespaces: true
       noSchemaStitching: true

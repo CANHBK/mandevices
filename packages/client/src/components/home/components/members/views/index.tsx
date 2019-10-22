@@ -13,7 +13,7 @@ const MembersPresentational: React.FC<{ members: IMemberCard[] }> = ({
 			danh sach thanh vien
 			<Row type="flex" justify="start">
 				{members.map(member => (
-					<Col span={6}>
+					<Col span={6} key={member.id}>
 						<MememberCardComponent
 							member={
 								member

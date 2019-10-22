@@ -1,3 +1,4 @@
+import { HOME_URI } from 'routes';
 import { IRoute } from '../../../interface';
 import Loadable from 'react-loadable';
 import React from 'react';
@@ -9,6 +10,10 @@ const MembersComponent = Loadable({
 });
 const HomePageComponent = Loadable({
 	loader: () => import('../components/home-page'),
+	loading: () => <UiLoading />
+});
+const GuardingComponent = Loadable({
+	loader: () => import('../components/guarding'),
 	loading: () => <UiLoading />
 });
 
@@ -31,10 +36,10 @@ export const navRoutes: IRoute[] = [
 	},
 	{
 		id: Math.random(),
-		name: 'Trang chủ',
-		uri: '/',
+		name: 'Lịch trực',
+		uri: '/guarding',
 		exact: true,
-		component: HomePageComponent
+		component: GuardingComponent
 	}
 ];
 
@@ -42,9 +47,16 @@ const routes: IRoute[] = [
 	{
 		id: Math.random(),
 		name: 'Trang cá nhân',
-		exact:false,
+		exact: false,
 		uri: PROFILE_URI,
 		component: ProfileComponent
+	},
+	{
+		id: Math.random(),
+		name: 'Trang chủ',
+		exact: false,
+		uri: HOME_URI,
+		component: HomePageComponent
 	}
 ];
 

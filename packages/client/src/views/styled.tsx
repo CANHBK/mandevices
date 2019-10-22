@@ -34,12 +34,12 @@ html,body,#root{
 body{
     margin:0px;
 }
-ul{
+/* ul{
     padding:0px;
     list-style: none;
     display: flex;
     margin:0;
-}
+} */
 ol{
     padding:0;
     margin:0;

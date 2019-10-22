@@ -20,6 +20,7 @@
 	},
 	"name": "mandevices",
 	"dependencies": {
-		"react-router-dom": "5.0.1"
+		"react-router-dom": "5.0.1",
+		"yup": "0.27.0"
 	}
 }

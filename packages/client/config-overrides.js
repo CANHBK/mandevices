@@ -5,5 +5,10 @@ module.exports = override(
 		libraryName: 'antd',
 		libraryDirectory: 'es',
 		style: 'css'
+	}),
+	fixBabelImports('formik-antd', {
+		libraryName: '@jbuschke/formik-antd',
+		libraryDirectory: 'es',
+		style: 'css'
 	})
 );
