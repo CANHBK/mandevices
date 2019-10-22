@@ -9,7 +9,7 @@
 		"start": "node dist/src/index.js",
 		"services": "npm-run-all --parallel service:*",
 		"dev": "npx nodemon -L --exec ts-node src/index.ts",
-		"build": "tsc",
+		
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
