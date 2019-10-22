@@ -1,6 +1,5 @@
 import assert from 'assert';
 import mongodb from 'mongodb';
-import { seed } from './seed';
 
 const MongoClient = mongodb.MongoClient;
 
