@@ -24,7 +24,6 @@
 		"jsonwebtoken": "8.5.1",
 		"lodash": "4.17.15",
 		"migrate": "1.6.2",
-		"mongo-seeding": "3.4.0-alpha.0",
 		"mongodb": "3.3.2",
 		"nodemailer": "6.3.1",
 		"reflect-metadata": "0.1.13",
