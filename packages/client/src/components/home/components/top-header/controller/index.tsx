@@ -1,6 +1,7 @@
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { AUTH_URI } from 'routes';
+import { REGISTER_URI } from 'components/auth/routes';
 import React from 'react';
 import { TOKEN } from 'App';
 import TopHeaderPresentational from '../views';
@@ -17,6 +18,9 @@ const TopHeaderController: React.FC<RouteComponentProps> = ({ history }) => {
 
 	return (
 		<TopHeaderPresentational
+			onRegisterClick={() =>
+				history.push(REGISTER_URI)
+			}
 			onLogoutClick={handleLogout}
 			isLogin={
 				data && data.isLogin

@@ -2,6 +2,7 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { Resolvers } from 'generated/apollo-react-hook.generated';
 import { TOKEN } from 'App';
 import gql from 'graphql-tag';
 import { onError } from 'apollo-link-error';
@@ -11,7 +12,21 @@ const typeDefs = gql`
 	extend type Query {
 		isLogin: Boolean
 	}
+
+	extend type Mutation {
+		logout: Boolean
+	}
 `;
+
+const resolvers: Resolvers = {
+	Mutation: {
+		logout: (_, __, { client }) => {
+			localStorage.removeItem(TOKEN);
+			client.resetStore();
+			return true;
+		}
+	}
+};
 
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists
@@ -46,11 +61,13 @@ export const client = new ApolloClient({
 		}),
 		authLink,
 		new HttpLink({
-			uri: 'http://localhost:5000/graphql'
+			uri: process.env.REACT_APP_SERVER_URL
 		})
 	]),
 	cache: new InMemoryCache(),
 	typeDefs,
+	// @ts-ignore
+	resolvers,
 	connectToDevTools: true
 });
 

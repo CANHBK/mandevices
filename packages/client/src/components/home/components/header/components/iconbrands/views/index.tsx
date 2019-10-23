@@ -1,45 +1,47 @@
-import React from 'react';
-import { IconBrands } from './ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { IconBrands } from './ui';
+import Item from 'antd/lib/list/Item';
+import { Menu } from 'antd';
+import React from 'react';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const IconBrandsPresentations = () => {
 	return (
-		<IconBrands>
-			<ul>
-				<li>
+		
+			<Menu mode="horizontal">
+				<Item>
 					<FontAwesomeIcon
 						icon={
 							faFacebook
 						}
 					/>
-				</li>
-				<li>
+				</Item>
+				<Item>
 					<FontAwesomeIcon
 						icon={
 							faTwitter
 						}
 					/>
-				</li>
-				<li>
+				</Item>
+				<Item>
 					<FontAwesomeIcon
 						icon={
 							faEnvelope
 						}
 					/>
-				</li>
-				<li>
+				</Item>
+				<Item>
 					<FontAwesomeIcon
 						icon={
 							faHeadphones
 						}
 					/>
-				</li>
-			</ul>
-		</IconBrands>
+				</Item>
+			</Menu>
+		
 	);
 };
 export default IconBrandsPresentations;

@@ -4,12 +4,16 @@ import BottomComponent from '../components/footer';
 import HeaderComponent from '../components/header';
 import React from 'react';
 import TopHeaderComponent from '../components/top-header';
+import { device } from 'theme';
 import routes from '../routes';
+import styled from 'styled-components';
 
 const HomePresentations = () => {
 	return (
 		<>
-			<TopHeaderComponent />
+			<TopHeader>
+				<TopHeaderComponent />
+			</TopHeader>
 			<HeaderComponent />
 			<Switch>
 				{routes.map(
@@ -42,3 +46,10 @@ const HomePresentations = () => {
 };
 
 export default HomePresentations;
+
+const TopHeader = styled.div`
+	display: none;
+	@media ${device.laptop} {
+		display: block;
+	}
+`;

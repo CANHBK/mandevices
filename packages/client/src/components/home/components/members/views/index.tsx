@@ -1,29 +1,47 @@
-import { Col, Row } from 'antd';
-
 import Container from 'shared/Container';
 import { IMemberCard } from '../controller';
 import MememberCardComponent from './components/member-card';
 import React from 'react';
+import { device } from 'theme';
+import styled from 'styled-components/macro';
 
 const MembersPresentational: React.FC<{ members: IMemberCard[] }> = ({
 	members
 }) => {
 	return (
-		<Container>
+		<MemberPage>
 			danh sach thanh vien
-			<Row type="flex" justify="start">
+			<MemberLists>
 				{members.map(member => (
-					<Col span={6} key={member.id}>
-						<MememberCardComponent
-							member={
-								member
-							}
-						/>
-					</Col>
+					<MememberCardComponent
+						key={
+							member.id
+						}
+						member={
+							member
+						}
+					/>
 				))}
-			</Row>
-		</Container>
+			</MemberLists>
+		</MemberPage>
 	);
 };
 
 export default MembersPresentational;
+
+const MemberPage = styled.div`
+	@media ${device.laptop} {
+		width: 80%;
+		margin: auto;
+	}
+`;
+
+const MemberLists = styled.div`
+	display: grid;
+	@media ${device.tablet} {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media ${device.laptop} {
+		grid-template-columns: repeat(3, 1fr);
+	}
+`;

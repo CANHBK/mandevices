@@ -1,13 +1,14 @@
 import RegisterPresentational, { OnRegister } from '../views';
 import { RouteComponentProps, withRouter } from 'react-router';
 
+import { HOME_URI } from 'routes';
 import { LOGIN_URI } from 'components/auth/routes';
 import React from 'react';
 import { useRegisterMutation } from 'generated/apollo-react-hook.generated';
 
 const RegisterController: React.FC<RouteComponentProps> = ({ history }) => {
 	const course: number[] = [];
-	const [register, { loading, error,data }] = useRegisterMutation();
+	const [register, { loading, error, data }] = useRegisterMutation();
 	for (let i = 50; i < 65; i++) {
 		course.push(i);
 	}
@@ -18,11 +19,12 @@ const RegisterController: React.FC<RouteComponentProps> = ({ history }) => {
 
 	return (
 		<RegisterPresentational
+			onLogoClick={() => history.push(HOME_URI)}
 			loading={loading}
 			onLoginClick={() => history.push(LOGIN_URI)}
 			courses={course}
 			error={error}
-			success={data&&data.register}
+			success={data && data.register}
 			onRegister={handleRegister}
 		/>
 	);

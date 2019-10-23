@@ -4,6 +4,7 @@ import {
 	useLoginMutation
 } from 'generated/apollo-react-hook.generated';
 
+import { HOME_URI } from 'routes';
 import LoginPresentational from '../views';
 import { REGISTER_URI } from 'components/auth/routes';
 import React from 'react';
@@ -37,6 +38,11 @@ const LoginController: React.FC<RouteComponentProps> = ({ history }) => {
 	return (
 		<>
 			<LoginPresentational
+				onLogoClick={() =>
+					history.push(
+						HOME_URI
+					)
+				}
 				onLogin={handleLogin}
 				loading={loading}
 				error={error}

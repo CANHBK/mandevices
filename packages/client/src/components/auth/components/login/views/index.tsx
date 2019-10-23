@@ -11,7 +11,6 @@ import React, { useEffect } from 'react';
 import { ApolloError } from 'apollo-client';
 import { Formik } from 'formik';
 import { Input } from '@jbuschke/formik-antd';
-import Loading from 'shared/UiLoading';
 import { LoginSchema } from 'components/auth/common';
 
 const { Item } = Form;
@@ -21,13 +20,15 @@ interface ILoginPresentational {
 	onRedirectToRegister?: () => void;
 	loading?: boolean;
 	error?: ApolloError | undefined;
+	onLogoClick?: () => void;
 }
 
 const LoginPresentational: React.FC<ILoginPresentational> = ({
 	onLogin,
 	loading = false,
 	onRedirectToRegister,
-	error
+	error,
+	onLogoClick
 }) => {
 	useEffect(() => {
 		if (error) {
@@ -40,7 +41,7 @@ const LoginPresentational: React.FC<ILoginPresentational> = ({
 	return (
 		<AuthPage>
 			<FormWrapper>
-				<Logo />
+				<Logo onClick={onLogoClick} />
 				<Formik
 					initialValues={{
 						email:
@@ -70,10 +71,6 @@ const LoginPresentational: React.FC<ILoginPresentational> = ({
 								handleSubmit
 							}
 						>
-							{console.log(
-								'errors',
-								errors
-							)}
 							<Item
 								validateStatus={
 									errors.email

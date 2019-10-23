@@ -9,4 +9,7 @@ gql`
 			token
 		}
 	}
+	mutation LogOut{
+		logout @client
+	}
 `

@@ -33,6 +33,7 @@ interface IRegisterPresentational extends FormComponentProps {
 	error: ApolloError | undefined;
 	loading?: boolean;
 	success?: boolean | null;
+	onLogoClick?: () => void;
 }
 
 const RegisterPresentational: React.FC<IRegisterPresentational> = ({
@@ -41,7 +42,8 @@ const RegisterPresentational: React.FC<IRegisterPresentational> = ({
 	onRegister,
 	error,
 	loading,
-	success
+	success,
+	onLogoClick
 }) => {
 	useEffect(() => {
 		if (error) {
@@ -63,7 +65,7 @@ const RegisterPresentational: React.FC<IRegisterPresentational> = ({
 
 	return (
 		<AuthPage>
-			<Logo />
+			<Logo onClick={onLogoClick} />
 			<FormWrapper>
 				<Formik
 					validationSchema={

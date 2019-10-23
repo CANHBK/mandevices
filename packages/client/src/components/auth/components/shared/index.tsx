@@ -16,7 +16,7 @@ export const FormWrapper = styled.div`
 
 export const AuthPage = styled.div`
 	background-color: #fafbfe;
-	height: 100%;
+	min-height: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
