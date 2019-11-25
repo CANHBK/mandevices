@@ -1,17 +1,17 @@
-import { Theme } from "./theme";
+import { Theme } from './theme';
 import {
 	ThemedStyledComponentsModule,
 	ThemedStyledInterface,
-	ThemedBaseStyledInterface,
-} from "styled-components";
+	ThemedBaseStyledInterface
+} from 'styled-components';
 
 const ModuleInterface: ThemedStyledComponentsModule<Theme>;
 
 const styled = ModuleInterface.default as ThemedBaseStyledInterface<Theme>;
-declare module "styled-components" {
+declare module 'styled-components' {
 	export interface DefaultTheme extends Theme {}
 }
-declare module "styled-components/macro" {
+declare module 'styled-components/macro' {
 	export const createGlobalStyle: typeof ModuleInterface.createGlobalStyle;
 	export const css: typeof ModuleInterface.css;
 	export const keyframes: typeof ModuleInterface.keyframes;

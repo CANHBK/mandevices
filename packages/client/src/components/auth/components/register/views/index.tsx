@@ -68,72 +68,43 @@ const RegisterPresentational: React.FC<IRegisterPresentational> = ({
 			<Logo onClick={onLogoClick} />
 			<FormWrapper>
 				<Formik
-					validationSchema={
-						AuthSchema
-					}
+					validationSchema={AuthSchema}
 					initialValues={{
-						course:
-							'',
-						name:
-							'',
-						email:
-							'',
-						password:
-							'',
-						confirmPassword:
-							''
+						course: '',
+						name: '',
+						email: '',
+						password: '',
+						confirmPassword: ''
 					}}
-					onSubmit={({
-						confirmPassword,
-						course,
-						...credentials
-					}) => {
-						onRegister(
-							{
-								course: parseInt(
-									course
-								),
-								...credentials
-							}
-						);
+					onSubmit={({ confirmPassword, course, ...credentials }) => {
+						onRegister({
+							course: parseInt(course),
+							...credentials
+						});
 					}}
 				>
-					{({
-						errors,
-
-						handleSubmit
-					}) => (
-						<Form
-							onSubmit={
-								handleSubmit
-							}
-						>
+					{({ errors, handleBlur, touched, handleSubmit }) => (
+						<Form onSubmit={handleSubmit}>
 							<Item
 								validateStatus={
-									errors.name
-										? 'error'
-										: 'success'
+									errors.name && touched.name ? 'error' : 'success'
 								}
-								help={
-									errors.name
-								}
+								help={touched.name && errors.name}
 							>
 								<Input
+									onBlur={handleBlur}
 									name="name"
 									placeholder="Họ và tên"
 								/>
 							</Item>
 							<Item
 								validateStatus={
-									errors.email
-										? 'error'
-										: 'success'
+									errors.email && touched.email ? 'error' : 'success'
 								}
-								help={
-									errors.email
-								}
+								help={touched.email && errors.email}
 							>
 								<Input
+									onBlur={handleBlur}
 									placeholder="Email"
 									type="email"
 									name="email"
@@ -141,94 +112,69 @@ const RegisterPresentational: React.FC<IRegisterPresentational> = ({
 							</Item>
 							<Item
 								validateStatus={
-									errors.course
-										? 'error'
-										: 'success'
+									errors.course && touched.course ? 'error' : 'success'
 								}
-								help={
-									errors.course
-								}
+								help={touched.course && errors.course}
 							>
 								<Select
 									placeholder="Khóa"
+									
 									name="course"
+									onBlur={handleBlur}
 								>
-									{courses.map(
-										(
-											course,
-											idx
-										) => (
-											<Select.Option
-												style={{
-													width:
-														'100%'
-												}}
-												key={
-													idx
-												}
-												value={
-													course
-												}
-											>
-												{`Khóa ${course}`}
-											</Select.Option>
-										)
-									)}
+									{courses.map((course, idx) => (
+										<Select.Option
+											style={{
+												width: '100%'
+											}}
+											key={idx}
+											value={course}
+										>
+											{`Khóa ${course}`}
+										</Select.Option>
+									))}
 								</Select>
 							</Item>
 							<Item
 								validateStatus={
-									errors.password
+									errors.password && touched.password
 										? 'error'
 										: 'success'
 								}
-								help={
-									errors.password
-								}
+								help={touched.password && errors.password}
 							>
 								<Input
+									onBlur={handleBlur}
 									name="password"
 									placeholder="Mật khẩu"
 									type="password"
 								/>
 							</Item>
+
 							<Item
 								validateStatus={
-									errors.confirmPassword
+									errors.confirmPassword && touched.confirmPassword
 										? 'error'
 										: 'success'
 								}
-								help={
-									errors.confirmPassword
-								}
+								help={touched.confirmPassword && errors.confirmPassword}
 							>
 								<Input
+									onBlur={handleBlur}
 									name="confirmPassword"
 									placeholder="Nhập lại mật khẩu"
 									type="password"
 								/>
 							</Item>
 							<AuthButton
-								loading={
-									loading
-								}
+								loading={loading}
 								type="primary"
 								htmlType="submit"
 							>
-								Đăng
-								kí
+								Đăng kí
 							</AuthButton>
-							<AuthRedirect
-								onClick={
-									onLoginClick
-								}
-							>
-								Đã
-								có
-								tài
-								khoản,
-								đăng
-								nhập
+							<AuthRedirect onClick={onLoginClick}>
+								Đã có tài khoản, đăng nhập
 							</AuthRedirect>
 						</Form>
 					)}

@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 
 import { ApolloError } from 'apollo-client';
 import { Formik } from 'formik';
+import {GoogleAuth} from "../../GoogleAuth"
 import { Input } from '@jbuschke/formik-antd';
 import { LoginSchema } from 'components/auth/common';
 
@@ -30,7 +31,9 @@ const LoginPresentational: React.FC<ILoginPresentational> = ({
 	error,
 	onLogoClick
 }) => {
+	
 	useEffect(() => {
+
 		if (error) {
 			notification.error({
 				message: error.message,
@@ -44,44 +47,24 @@ const LoginPresentational: React.FC<ILoginPresentational> = ({
 				<Logo onClick={onLogoClick} />
 				<Formik
 					initialValues={{
-						email:
-							'',
-						password:
-							''
+						email: '',
+						password: ''
 					}}
-					onSubmit={({
-						email,
-						password
-					}) => {
-						onLogin(
-							email,
-							password
-						);
+					onSubmit={({ email, password }) => {
+						onLogin(email, password);
 					}}
-					validationSchema={
-						LoginSchema
-					}
+					validationSchema={LoginSchema}
 				>
-					{({
-						errors,
-						handleSubmit
-					}) => (
-						<Form
-							onSubmit={
-								handleSubmit
-							}
-						>
+					{({ errors, handleSubmit, handleBlur, touched }) => (
+						<Form onSubmit={handleSubmit}>
 							<Item
 								validateStatus={
-									errors.email
-										? 'error'
-										: 'success'
+									errors.email && touched.email ? 'error' : 'success'
 								}
-								help={
-									errors.email
-								}
+								help={touched.email && errors.email}
 							>
 								<Input
+									onBlur={handleBlur}
 									placeholder="Email"
 									name="email"
 									type="email"
@@ -89,13 +72,11 @@ const LoginPresentational: React.FC<ILoginPresentational> = ({
 							</Item>
 							<Item
 								validateStatus={
-									errors.password
+									errors.password && touched.password
 										? 'error'
 										: 'success'
 								}
-								help={
-									errors.password
-								}
+								help={touched.password && errors.password}
 							>
 								<Input
 									placeholder="Mật khẩu"
@@ -105,27 +86,22 @@ const LoginPresentational: React.FC<ILoginPresentational> = ({
 							</Item>
 
 							<AuthButton
-								loading={
-									loading
-								}
+								loading={loading}
 								type="primary"
 								htmlType="submit"
 							>
-								Đăng
-								nhập
+								Đăng nhập
 							</AuthButton>
 						</Form>
 					)}
 				</Formik>
+			
 
-				<AuthRedirect
-					onClick={
-						onRedirectToRegister
-					}
-				>
-					Chưa có tài khoản?
-					Đăng kí
+				<AuthRedirect onClick={onRedirectToRegister}>
+					Chưa có tài khoản? Đăng kí
 				</AuthRedirect>
+
+				<GoogleAuth/>
 			</FormWrapper>
 		</AuthPage>
 	);

@@ -4,4 +4,23 @@
 	"editor.detectIndentation": false,
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"workbench.list.horizontalScrolling": true,
+	"editor.tabSize": 6,
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#1890ff"
+	},
+	"editor.fontFamily": "'Fira Code',Consolas, 'Courier New', monospace",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 14,
+	"[javascript,typescript]": {
+		"editor.fontSize": 10,
+		"editor.fontLigatures": "'ss02', 'ss19', 'ss05', 'ss04','ss03'"
+	},
+	"cSpell.words": [
+		"Canhbkhn",
+		"danh",
+		"mandevices",
+		"rabc",
+		"sách",
+		"typeorm"
+	]
 }

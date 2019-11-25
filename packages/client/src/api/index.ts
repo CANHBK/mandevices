@@ -1,15 +1,27 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 gql`
-	query IsLogin{
+	query IsLogin {
 		isLogin @client
 	}
-	query CurrentUser{
-		currentUser{
+	query CurrentUser {
+		currentUser {
 			token
+			user {
+				id
+				name
+				email
+				roles
+			}
 		}
 	}
-	mutation LogOut{
+	query Users {
+		users {
+			id
+			name
+		}
+	}
+	mutation LogOut {
 		logout @client
 	}
-`
+`;

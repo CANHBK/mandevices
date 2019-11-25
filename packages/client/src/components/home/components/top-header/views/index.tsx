@@ -17,6 +17,7 @@ const TopHeaderPresentational: React.FC<ITopHeaderPresentational> = ({
 	const handleLogin = () => {
 		onLoginClick();
 	};
+	
 
 	return (
 		<TopHeader>

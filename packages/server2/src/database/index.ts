@@ -1,33 +1,23 @@
-import assert from 'assert';
-import mongodb from 'mongodb';
+import "reflect-metadata";
 
-const MongoClient = mongodb.MongoClient;
+import { createConnection } from "typeorm";
+import path from "path";
 
-const url = process.env.DATABASE_CONNECTION_STRING!;
+console.log(
+	'path.join(__dirname,"security")',
+	path.join(__dirname, "security")
+);
 
-const dbName = 'mandevices';
-
-const client = new MongoClient(url, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-});
-
-export const dbConnect = (): Promise<mongodb.Db> => {
-	return new Promise(resolve => {
-		client.connect(err => {
-			assert.strictEqual(null, err);
-			const dbo = client.db(dbName);
-			resolve(dbo);
-		});
-	});
-};
-
-// seed()
-// if (process.env.NODE_ENV === 'development') {
-// 	const seed = require('./seed');
-// 	try {
-// 		seed.default();
-// 	} catch (error) {
-// 		console.log('error', error);
-// 	}
-// }
+createConnection()
+	.then(connection => {
+		console.log("Connected to Database");
+		connection
+			.runMigrations()
+			.then(() => {
+				console.log("Run migration successfully");
+			})
+			.catch(errorMigration => console.log("errorMigration", errorMigration));
+	})
+	.catch(errorDatabaseConnection =>
+		console.log("errorDatabaseConnection", errorDatabaseConnection)
+	);

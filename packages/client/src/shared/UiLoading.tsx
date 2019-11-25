@@ -1,5 +1,5 @@
-import BarLoader from 'react-spinners/BarLoader';
-import React from 'react';
+import BarLoader from "react-spinners/BarLoader";
+import React from "react";
 
 interface ICProps {
 	className?: string;

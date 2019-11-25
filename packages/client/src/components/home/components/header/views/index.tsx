@@ -1,23 +1,28 @@
+import { DrawerArea } from 'shared/Drawer';
 import DrawerComponent from '../components/drawer';
+import { Header } from 'shared/Header';
+import { HeaderLogo } from 'shared/Logo';
 import { IRoute } from '../../../../../interface';
 import Menu from '../components/menu';
 import React from 'react';
 import { device } from 'theme';
-import logo from 'assets/logo.png';
 import styled from 'styled-components/macro';
 
 interface IHeaderProps {
 	routes: IRoute[];
-	onLogoClick: ()=>void;
+	onLogoClick: () => void;
 }
 
-const HeaderPresentations: React.FC<IHeaderProps> = ({ routes,onLogoClick }) => {
+const HeaderPresentations: React.FC<IHeaderProps> = ({
+	routes,
+	onLogoClick
+}) => {
 	return (
 		<Header>
-			<DrawerAreaa>
+			<DrawerArea>
 				<DrawerComponent />
-			</DrawerAreaa>
-			<Logo onClick={onLogoClick}/>
+			</DrawerArea>
+			<HeaderLogo onClick={onLogoClick} />
 			<MainMenu>
 				<Menu routes={routes} />
 			</MainMenu>
@@ -27,32 +32,6 @@ const HeaderPresentations: React.FC<IHeaderProps> = ({ routes,onLogoClick }) => 
 
 export default HeaderPresentations;
 
-const DrawerAreaa = styled.div`
-	position: absolute;
-	left: 16px;
-	@media ${device.laptop} {
-		display: none;
-	}
-`;
-const Logo = styled.div`
-	background-image: url(${logo});
-	background-size: contain;
-	background-repeat: no-repeat;
-	flex: 1;
-	align-self: stretch;
-	padding: 5px 20px;
-	background-origin: content-box;
-	background-position: center;
-`;
-
-const Header = styled.header`
-	position: relative;
-	max-width: 100%;
-	display: flex;
-	align-items: center;
-	min-height: 56px;
-	box-shadow: 0 2px 8px #f0f1f2;
-`;
 
 const MainMenu = styled.nav`
 	flex: 5;

@@ -2,8 +2,10 @@ import { Button, Drawer, Menu } from 'antd';
 import React, { useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
+import { ADMIN_URI } from 'routes';
 import { CustomMenu } from 'shared/Menu';
 import { IRoute } from 'interface';
+import UserComponent from '../components/user';
 import styled from 'styled-components/macro';
 import { useIsLoginQuery } from 'generated/apollo-react-hook.generated';
 
@@ -19,11 +21,11 @@ const DrawerPresentational: React.FC<IDrawer> = ({
 	onLogOutClick,
 	onLoginClick,
 	history,
-	location,
-	match
+	location
 }) => {
 	const [visible, setVisible] = useState(false);
 	const { data } = useIsLoginQuery();
+
 	const handleLogout = () => {
 		setVisible(false);
 		onLogOutClick();
@@ -34,7 +36,6 @@ const DrawerPresentational: React.FC<IDrawer> = ({
 		setVisible(false);
 	};
 
-	
 	return (
 		<>
 			<Button
@@ -44,7 +45,6 @@ const DrawerPresentational: React.FC<IDrawer> = ({
 				}}
 			/>
 			<CustomDrawer
-		
 				visible={visible}
 				placement="left"
 				onClose={() =>
@@ -52,14 +52,25 @@ const DrawerPresentational: React.FC<IDrawer> = ({
 				}
 			>
 				<CustomMenu
-				defaultSelectedKeys={[location.pathname]}
-					onClick={e =>
-						console.log(
-							'e',
-							e
-						)
-					}
+					defaultSelectedKeys={[
+						location.pathname
+					]}
 				>
+					{data!!.isLogin ? (
+						<UserComponent />
+					) : null}
+					<Item
+						onClick={() =>
+							history.push(
+								ADMIN_URI
+							)
+						}
+					>
+						Trang
+						quản trị
+					</Item>
+					<Divider />
+
 					{routes.map(
 						route => (
 							<Item
@@ -125,6 +136,6 @@ const CustomDrawer = styled(Drawer)`
 	.ant-drawer-body {
 		padding-left: 0;
 		padding-right: 0;
-		padding-top: 50px;
+		padding-top: 56px;
 	}
 `;

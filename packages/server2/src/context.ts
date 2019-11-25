@@ -1,6 +1,6 @@
-import mongodb from 'mongodb';
+import mongodb from "mongodb";
 
 export interface Context {
 	dbClient: mongodb.Db;
-	token: string
+	token: string;
 }
