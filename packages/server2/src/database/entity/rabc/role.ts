@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 
 import { Permission } from "./permission";
-import { UserGroup } from "../UserEntity";
+import { UserGroupEntity } from "../user/UserEntity";
 
 @Entity()
 export class Role {
@@ -20,10 +20,10 @@ export class Role {
 	name: string;
 
 	@ManyToMany(
-		type => UserGroup,
+		type => UserGroupEntity,
 		userGroup => userGroup.roles
 	)
-	userGroups: UserGroup[];
+	userGroups: UserGroupEntity[];
 
 	@ManyToMany(
 		type => Permission,

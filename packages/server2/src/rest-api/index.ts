@@ -1,15 +1,16 @@
 import express from "express";
 import path from "path";
-import userRoutes from "./routes/user";
+import routeHandlers from "./routes";
+import cors from "cors";
 
 export const setupExpress = () => {
-	const app = express();
-
-	/**
-	 * Cài đặt Template Engine EJS
-	 */
-	app.set("view engine", "ejs");
-	app.set("views", path.join(__dirname, "views"));
-	app.use("/user", userRoutes);
-	return app;
+  const app = express();
+  app.use(cors());
+  /**
+   * Cài đặt Template Engine EJS
+   */
+  app.set("view engine", "ejs");
+  app.set("views", path.join(__dirname, "views"));
+  app.use("/", routeHandlers);
+  return app;
 };

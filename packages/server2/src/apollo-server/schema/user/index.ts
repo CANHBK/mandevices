@@ -26,43 +26,42 @@ export const resolvers: Resolvers = {
 	Query: {
 		currentUser: async (_, __, { token }) => {
 			if (!token) return null;
-			const result = verify(token, process.env.TOKEN_SECRET!);
 
-			const existingUser = await UserProfileController.getInstance().findById(
-				(result as any).id
+			const profileToken = await UserProfileController.getInstance().createToken(
+				token
 			);
-
-			if (!existingUser) {
-				return null;
-			}
 			return {
-				token: generateToken(existingUser.id),
-				user: existingUser
+				token: profileToken
 			};
 		},
 
-		users: async (_, __, { dbClient }) => {
-			return dbClient
-				.collection<User>(Collections.Users)
-				.find()
-				.toArray();
+		users: async (_, __) => {
+			return null;
+			// return dbClient
+			// 	.collection<User>(Collections.Users)
+			// 	.find()
+			// 	.toArray();
 		}
 	},
 	Mutation: {
-		register: async (_, { name, email, password, course }, { dbClient }) => {
+		register: async (_, { name, email, password, course }) => {
 			const userProfileController = UserProfileController.getInstance();
 			const userAccountController = UserAccountController.getInstance();
 			/**
 			 * Kiểm tra dữ liệu đầu vào
 			 */
 			if (password.length < 6) {
-				throw new Error("Mật khẩu phải có độ dài tối thiểu 6 kí tự");
+				throw new Error(
+					"Mật khẩu phải có độ dài tối thiểu 6 kí tự"
+				);
 			}
 
 			/**
 			 * Kiểm tra Email đã được đăng kí chưa
 			 */
-			const existingUserProfile = await userProfileController.getByEmail(email);
+			const existingUserProfile = await userProfileController.getByEmail(
+				email
+			);
 			if (existingUserProfile) {
 				throw new Error("Email đã được đăng kí");
 			}
@@ -78,7 +77,10 @@ export const resolvers: Resolvers = {
 				/**
 				 * Tạo mã xác thực để gửi Email
 				 */
-				const emailConfirmationToken = await hash(email, salt);
+				const emailConfirmationToken = await hash(
+					email,
+					salt
+				);
 
 				/**
 				 * Lưu vào database
@@ -102,7 +104,8 @@ export const resolvers: Resolvers = {
 							emailConfirmationToken,
 							password: hashPassword,
 							passwordSalt: salt,
-							passwordHashAlgorithm: "OpenBSD",
+							passwordHashAlgorithm:
+								"OpenBSD",
 							registrationTime: new Date(),
 							userProfile
 						},
@@ -126,7 +129,8 @@ export const resolvers: Resolvers = {
 					to: email,
 					from: "no-reply@mandevices.com",
 					subject: "Xác thực tài khoản",
-					text: "and easy to do anywhere, even with Node.js",
+					text:
+						"and easy to do anywhere, even with Node.js",
 					html: `<div>Click <a href="${link}">vào đây</a> để xác thực tài khoản </div>`
 				};
 
@@ -139,12 +143,14 @@ export const resolvers: Resolvers = {
 				throw new Error(error);
 			}
 		},
-		login: async (_, { email, password }, { dbClient }) => {
+		login: async (_, { email, password }) => {
 			const userAccountController = UserAccountController.getInstance();
 			/**
 			 * Kiểm tra tài khoản có tồn tại
 			 */
-			const existingUserAccount = await userAccountController.getByEmail(email);
+			const existingUserAccount = await userAccountController.getByEmail(
+				email
+			);
 			if (!existingUserAccount) {
 				throw new Error("Tài khoản không tồn tại");
 			}
@@ -171,47 +177,52 @@ export const resolvers: Resolvers = {
 			}
 
 			/**
-			 * Tạo token chứa id và roles
+			 * Trả về token chứa id của userAccount
 			 */
-			const token = generateToken(existingUserAccount.id);
 
 			return {
-				token
+				token: userAccountController.createToken(
+					existingUserAccount.id
+				)
 			};
 		},
 
-		facebookLogin: async (_, { name, email, avatar }, { dbClient }) => {
-			const existingUser = await dbClient
-				.collection("users")
-				.findOne({ email });
+		facebookLogin: async (_, { name, email, avatar }) => {
+			// const existingUser = await dbClient
+			// 	.collection("users")
+			// 	.findOne({ email });
 
-			if (existingUser) {
-				return {
-					token: sign(
-						{
-							id: existingUser._id
-						},
-						process.env.TOKEN_SECRET!
-					),
-					user: existingUser
-				};
-			}
-			try {
-				const newUser = (
-					await dbClient.collection("users").insertOne({
-						email,
-						name,
-						roles: [Roles.User],
-						avatar
-					})
-				).ops[0];
-				return {
-					token: generateToken(newUser._id),
-					user: newUser
-				};
-			} catch (error) {
-				throw new Error(error);
-			}
+			// if (existingUser) {
+			// 	return {
+			// 		token: sign(
+			// 			{
+			// 				id: existingUser._id
+			// 			},
+			// 			process.env
+			// 				.JSON_WEB_TOKEN_SECRET!
+			// 		),
+			// 		user: existingUser
+			// 	};
+			// }
+			// try {
+			// 	const newUser = (
+			// 		await dbClient
+			// 			.collection("users")
+			// 			.insertOne({
+			// 				email,
+			// 				name,
+			// 				roles: [Roles.User],
+			// 				avatar
+			// 			})
+			// 	).ops[0];
+			// 	return {
+			// 		token: generateToken(newUser._id),
+			// 		user: newUser
+			// 	};
+			// } catch (error) {
+			// 	throw new Error(error);
+			// }
+			return null;
 		}
 	}
 };
@@ -220,8 +231,7 @@ const generateToken = (id: String | number) => {
 	return sign(
 		{
 			id
-			// roles
 		},
-		process.env.TOKEN_SECRET!
+		process.env.JSON_WEB_TOKEN_SECRET!
 	);
 };

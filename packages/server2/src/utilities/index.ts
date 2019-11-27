@@ -1,4 +1,5 @@
 import { PathLike, readdir } from "fs";
+import { sign } from "jsonwebtoken";
 
 export const getListNameFolder = async (path: PathLike): Promise<string[]> => {
 	const result: string[] = [];
@@ -21,4 +22,13 @@ export const getListNameFolder = async (path: PathLike): Promise<string[]> => {
 			}
 		);
 	});
+};
+
+export const generateToken = (id: string | number) => {
+	return sign(
+		{
+			id
+		},
+		process.env.JSON_WEB_TOKEN_SECRET!
+	);
 };

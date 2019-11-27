@@ -1,17 +1,19 @@
 overwrite: true
-schema: './src/**/schema.ts'
+schema: "./src/**/schema.ts"
 documents: null
 generates:
-            src/generated/graphql.ts:
-                        plugins:
-                                    - 'typescript'
-                                    - 'typescript-resolvers'
-                        config:
-                                    contextType: ../context#Context
-                                    skipTypename: true
-            ../android/app/src/main/graphql/bkhn.mandevices.iot.mandevices/schema.json:
-                        plugins:
-                                    - 'introspection'
-            ./schema.json:
-                        plugins:
-                                    - 'introspection'
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      contextType: ../context#Context
+      skipTypename: true
+      scalars:
+        DateTime: string
+  ../android/app/src/main/graphql/bkhn.mandevices.iot.mandevices/schema.json:
+    plugins:
+      - "introspection"
+  ./schema.json:
+    plugins:
+      - "introspection"

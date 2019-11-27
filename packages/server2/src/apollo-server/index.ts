@@ -11,7 +11,7 @@ const getUser = async (req: ExpressContext) => {
 	if (!token) {
 		return null;
 	}
-	const decodedToken = verify(token, process.env.TOKEN_SECRET!);
+	const decodedToken = verify(token, process.env.JSON_WEB_TOKEN_SECRET!);
 
 	return decodedToken;
 };
@@ -32,6 +32,7 @@ export const getApolloServer = async () => {
 		playground: true,
 		introspection: true,
 		context: request => {
+
 			return {
 				token: request.req.headers.authorization,
 				user: getUser(request)

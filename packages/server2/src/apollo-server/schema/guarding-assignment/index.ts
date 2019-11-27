@@ -42,11 +42,12 @@ export const resolvers: Resolvers = {
 	},
 
 	Query: {
-		guardingAssignments: async (_, __, { dbClient }) => {
-			return dbClient
-				.collection(Collections.GuardAssignmentRegistrations)
-				.find()
-				.toArray();
+		guardingAssignments: async (_, __) => {
+			// return dbClient
+			// 	.collection(Collections.GuardAssignmentRegistrations)
+			// 	.find()
+			// 	.toArray();
+			return null
 		}
 		// guardingAssignment: async (_, { where }, { dbClient }) => {
 		// 	return dbClient
@@ -60,82 +61,83 @@ export const resolvers: Resolvers = {
 		registerGuardingAssignment: async (
 			_,
 			{ day, session },
-			{ dbClient, token }
+			{  token }
 		) => {
-			const { id } = verifyToken(token);
-			const existinRegistrationOfThisUser = await dbClient
-				.collection("guardAssignmentRegistrations")
-				.findOne({
-					dayOfWeeks: day,
-					"users.userId": id
-				});
+			// const { id } = verifyToken(token);
+			// const existinRegistrationOfThisUser = await dbClient
+			// 	.collection("guardAssignmentRegistrations")
+			// 	.findOne({
+			// 		dayOfWeeks: day,
+			// 		"users.userId": id
+			// 	});
 
-			if (existinRegistrationOfThisUser) {
-				if (!session) {
-					const updated = await dbClient
-						.collection(Collections.GuardAssignmentRegistrations)
-						.findOneAndUpdate(
-							{
-								dayOfWeeks: day,
-								"users.userId": id
-							},
-							{
-								$pull: {
-									users: {
-										userId: id
-									}
-								}
-							}
-						);
+			// if (existinRegistrationOfThisUser) {
+			// 	if (!session) {
+			// 		const updated = await dbClient
+			// 			.collection(Collections.GuardAssignmentRegistrations)
+			// 			.findOneAndUpdate(
+			// 				{
+			// 					dayOfWeeks: day,
+			// 					"users.userId": id
+			// 				},
+			// 				{
+			// 					$pull: {
+			// 						users: {
+			// 							userId: id
+			// 						}
+			// 					}
+			// 				}
+			// 			);
 
-					return updated.value;
-				}
-				const user = existinRegistrationOfThisUser.users.filter(
-					(user: any) => user.userId == id
-				)[0];
+			// 		return updated.value;
+			// 	}
+			// 	const user = existinRegistrationOfThisUser.users.filter(
+			// 		(user: any) => user.userId == id
+			// 	)[0];
 
-				if (JSON.stringify(user.session) == JSON.stringify(session)) {
-					throw new Error("Đã đăng kí");
-				}
-				const updated = await dbClient
-					.collection(Collections.GuardAssignmentRegistrations)
-					.findOneAndUpdate(
-						{
-							dayOfWeeks: day,
-							"users.userId": id
-						},
-						{
-							$set: {
-								"users.$.session": session
-							}
-						}
-					);
+			// 	if (JSON.stringify(user.session) == JSON.stringify(session)) {
+			// 		throw new Error("Đã đăng kí");
+			// 	}
+			// 	const updated = await dbClient
+			// 		.collection(Collections.GuardAssignmentRegistrations)
+			// 		.findOneAndUpdate(
+			// 			{
+			// 				dayOfWeeks: day,
+			// 				"users.userId": id
+			// 			},
+			// 			{
+			// 				$set: {
+			// 					"users.$.session": session
+			// 				}
+			// 			}
+			// 		);
 
-				return updated.value;
-			}
-			if (!session) {
-				throw new Error("Phải đăng kí buổi trực");
-			}
-			const updated = await dbClient
-				.collection(Collections.GuardAssignmentRegistrations)
-				.findOneAndUpdate(
-					{
-						dayOfWeeks: day
-					},
-					{
-						$push: {
-							users: {
-								userId: id,
-								session
-							}
-						}
-					}
-				);
+			// 	return updated.value;
+			// }
+			// if (!session) {
+			// 	throw new Error("Phải đăng kí buổi trực");
+			// }
+			// const updated = await dbClient
+			// 	.collection(Collections.GuardAssignmentRegistrations)
+			// 	.findOneAndUpdate(
+			// 		{
+			// 			dayOfWeeks: day
+			// 		},
+			// 		{
+			// 			$push: {
+			// 				users: {
+			// 					userId: id,
+			// 					session
+			// 				}
+			// 			}
+			// 		}
+			// 	);
 
-			return updated.value;
+			// return updated.value;
+			return null
 		},
 
-		trucLab: async (_, { day, session }, { dbClient, token }) => {
+		trucLab: async (_, { day, session }, { token }) => {
 			const { id }: any = verifyToken(token);
 
 			// dbClient.collection<GuardingAssignment>("guardAssignments").insertOne({

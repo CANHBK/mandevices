@@ -1,59 +1,16 @@
 import {
 	Column,
-	Entity,
-	JoinColumn,
-	JoinTable,
-	ManyToMany,
 	OneToOne,
-	PrimaryGeneratedColumn
+	JoinColumn,
+	PrimaryGeneratedColumn,
+	Entity
 } from "typeorm";
+import { UserProfileEntity } from "./UserProfileEntity";
 
-import { Role } from "./rabc/role";
-
-@Entity()
-export class UserGroup {
-	@PrimaryGeneratedColumn()
-	id: number;
-
-	@ManyToMany(
-		type => Role,
-		role => role.userGroups
-	)
-	@JoinTable()
-	roles: Role[];
-
-	@ManyToMany(
-		type => UserProfile,
-		userProfile => userProfile.userGroup
-	)
-	@JoinTable()
-	users: UserProfile[];
-}
-
-@Entity()
-export class UserProfile {
-	@PrimaryGeneratedColumn()
-	id: number;
-
-	@Column({
-		nullable: false
-	})
-	fullName: string;
-
-	@Column({
-		nullable: false
-	})
-	email: string;
-
-	@ManyToMany(
-		type => UserGroup,
-		userGroup => userGroup.users
-	)
-	userGroup: UserGroup[];
-}
-
-@Entity()
-export class UserAccount {
+@Entity({
+	name: "user_account"
+})
+export class UserAccountEntity {
 	@PrimaryGeneratedColumn()
 	id: number;
 
@@ -97,7 +54,7 @@ export class UserAccount {
 	})
 	passwordReminderExpire: number;
 
-	@OneToOne(type => UserProfile)
+	@OneToOne(type => UserProfileEntity)
 	@JoinColumn()
-	userProfile: UserProfile;
+	userProfile: UserProfileEntity;
 }
