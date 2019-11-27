@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node build/index.js",
-		"build-ts": "npm run generate && tsc",
+		"build-ts": "tsc",
 		"dev": "run-p start:dev gen",
 		"start:dev": "env-cmd -f .env nodemon --exec ts-node src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1",

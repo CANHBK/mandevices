@@ -15,7 +15,7 @@ dist
 **/*.staging.yml
 
 #gen
-generated
+# generated
 
 #logs
 logs
