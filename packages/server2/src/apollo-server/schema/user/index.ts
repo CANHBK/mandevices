@@ -1,52 +1,51 @@
-import { Resolvers, Roles, User } from "../../../generated/graphql";
-import {
-	UserAccountController,
-	UserProfileController
-} from "../../../database/controller/UserController";
+import { UserAccountController } from "../../../database/controller/UserController";
 import { compare, genSalt, hash } from "bcryptjs";
 import { send, setApiKey } from "@sendgrid/mail";
 import { sign, verify } from "jsonwebtoken";
-
-import { Collections } from "../collections";
-import { getConnection } from "typeorm";
 import typeDefs from "./schema";
 
 export default typeDefs;
 
-export const resolvers: Resolvers = {
+export const resolvers = {
+
 	User: {
-		id: parent => {
-			if (!parent.id) {
-				// Fix _id return with MongoDB
-				return (parent as any)._id;
-			}
-			return parent.id;
+		firstName: parent => {
+			if (!parent.fullName)
+				throw new Error("fullName is undefined");
+			const fullNameArray = parent.fullName.split(" ");
+			return fullNameArray[fullNameArray.length - 1];
 		}
 	},
 	Query: {
-		currentUser: async (_, __, { token }) => {
+		user: (_,{where}) => {
+			return UserAccountController.getInstance().getById(where.id)
+		},
+		currentUser: async (_, __, { token }, info) => {
 			if (!token) return null;
-
-			const profileToken = await UserProfileController.getInstance().createToken(
-				token
+			const result = verify(
+				token,
+				process.env.JSON_WEB_TOKEN_SECRET!
 			);
+			const userAccountController = UserAccountController.getInstance();
+			const authInfo = await userAccountController.getById(
+				(result as any).id
+			);
+			console.log("authInfo :", authInfo);
 			return {
-				token: profileToken
-			};
+				token: userAccountController.createToken(authInfo.id),
+				user:authInfo};
 		},
 
-		users: async (_, __) => {
-			return null;
-			// return dbClient
-			// 	.collection<User>(Collections.Users)
-			// 	.find()
-			// 	.toArray();
+		users: async (_, __, ___, info) => {
+			const userController = UserAccountController.getInstance();
+			const result = await userController.getAll(info);
+			return result;
 		}
 	},
 	Mutation: {
-		register: async (_, { name, email, password, course }) => {
-			const userProfileController = UserProfileController.getInstance();
+		register: async (_, { fullName, email, password }) => {
 			const userAccountController = UserAccountController.getInstance();
+
 			/**
 			 * Kiểm tra dữ liệu đầu vào
 			 */
@@ -59,7 +58,7 @@ export const resolvers: Resolvers = {
 			/**
 			 * Kiểm tra Email đã được đăng kí chưa
 			 */
-			const existingUserProfile = await userProfileController.getByEmail(
+			const existingUserProfile = await userAccountController.getByEmail(
 				email
 			);
 			if (existingUserProfile) {
@@ -86,37 +85,15 @@ export const resolvers: Resolvers = {
 				 * Lưu vào database
 				 */
 
-				const queryRunner = getConnection().createQueryRunner();
-				await queryRunner.connect();
-				await queryRunner.startTransaction();
 				try {
-					const userProfile = await userProfileController.create(
-						{
-							email,
-							fullName: name
-						},
-						queryRunner
-					);
-
-					await userAccountController.create(
-						{
-							email,
-							emailConfirmationToken,
-							password: hashPassword,
-							passwordSalt: salt,
-							passwordHashAlgorithm:
-								"OpenBSD",
-							registrationTime: new Date(),
-							userProfile
-						},
-						queryRunner
-					);
-					await queryRunner.commitTransaction();
+					await userAccountController.create({
+						email,
+						emailConfirmationToken,
+						password: hashPassword,
+						fullName
+					});
 				} catch (error) {
-					await queryRunner.rollbackTransaction();
 					throw new Error(error);
-				} finally {
-					await queryRunner.release();
 				}
 
 				/**
@@ -133,8 +110,12 @@ export const resolvers: Resolvers = {
 						"and easy to do anywhere, even with Node.js",
 					html: `<div>Click <a href="${link}">vào đây</a> để xác thực tài khoản </div>`
 				};
+				try {
+					await send(msg);
+				} catch (error) {
+					throw new Error(error);
+				}
 
-				await send(msg);
 				/**
 				 * Done
 				 */
@@ -149,7 +130,10 @@ export const resolvers: Resolvers = {
 			 * Kiểm tra tài khoản có tồn tại
 			 */
 			const existingUserAccount = await userAccountController.getByEmail(
-				email
+				email,
+				"emailConfirmationToken",
+				"password",
+				"fullName"
 			);
 			if (!existingUserAccount) {
 				throw new Error("Tài khoản không tồn tại");
@@ -179,11 +163,13 @@ export const resolvers: Resolvers = {
 			/**
 			 * Trả về token chứa id của userAccount
 			 */
+			const token = userAccountController.createToken(
+				existingUserAccount.id
+			)
 
 			return {
-				token: userAccountController.createToken(
-					existingUserAccount.id
-				)
+				token ,
+				user: existingUserAccount
 			};
 		},
 
@@ -223,6 +209,12 @@ export const resolvers: Resolvers = {
 			// 	throw new Error(error);
 			// }
 			return null;
+		},
+		updateUser: async (_, { where, data }, __, info) => {
+			console.log("where,data :", where, data);
+			const userController = UserAccountController.getInstance();
+
+			return userController.update(where, data, info);
 		}
 	}
 };

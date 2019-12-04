@@ -9,7 +9,11 @@ export const emailConfirmHandler = async (
 	const { email, token } = req.query;
 
 	const userAccountController = UserAccountController.getInstance();
-	const result = await UserAccountController.getInstance().getByEmail(email);
+	const result = await UserAccountController.getInstance().getByEmail(
+		email,
+		"password",
+		"emailConfirmationToken"
+	);
 
 	if (!result) {
 		return res.send("Tài khoản không tồn tại");

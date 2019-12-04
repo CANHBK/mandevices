@@ -1,6 +1,5 @@
 import { getRepository, Repository } from "typeorm";
 import { PostEntity } from "../entity/post/PostEntity";
-import { PostWhereUniqueInput } from "../../generated/graphql";
 import { UserProfileEntity } from "../entity/user/UserProfileEntity";
 
 interface PostCreateInput {
@@ -37,7 +36,7 @@ export class PostController {
 		return this.postRepository.save(post);
 	}
 
-	getPost = (where: PostWhereUniqueInput) => {
+	getPost = (where: { id: string }) => {
 		return this.postRepository.findOne(where.id);
 	};
 
@@ -48,7 +47,7 @@ export class PostController {
 		newPost.title = postUpdateInput.title;
 		return this.postRepository.update(postId, newPost);
 	};
-	deletePost = (where: PostWhereUniqueInput) => {
+	deletePost = (where: {id: string}) => {
 		return this.postRepository.delete(where.id);
 	};
 

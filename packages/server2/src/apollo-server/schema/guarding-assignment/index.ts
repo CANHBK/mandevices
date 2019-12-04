@@ -1,20 +1,10 @@
-import {
-	GuardingAssignment,
-	Resolvers,
-	Session,
-	User
-} from "../../../generated/graphql";
-import { genSalt, hash } from "bcryptjs";
-import { sign, verify } from "jsonwebtoken";
-
-import { Collections } from "../collections";
-import { UserProfileController } from "../../../database/controller/UserController";
+import { verify } from "jsonwebtoken";
 import { difference } from "lodash";
 import typeDefs from "./schema";
 
 export default typeDefs;
 
-export const resolvers: Resolvers = {
+export const resolvers = {
 	GuardingAssignmentSubscriber: {
 		// user: (parent, _, { dbClient }) => {
 		// 	return UserProfileController.getInstance().findById(
@@ -29,7 +19,10 @@ export const resolvers: Resolvers = {
 		subscribers: async (parent, { where }) => {
 			return (parent as any).users.filter((user: any) => {
 				if (where && where.session) {
-					return !difference(where.session, user.session).length;
+					return !difference(
+						where.session,
+						user.session
+					).length;
 				}
 				return true;
 			});
@@ -47,7 +40,7 @@ export const resolvers: Resolvers = {
 			// 	.collection(Collections.GuardAssignmentRegistrations)
 			// 	.find()
 			// 	.toArray();
-			return null
+			return null;
 		}
 		// guardingAssignment: async (_, { where }, { dbClient }) => {
 		// 	return dbClient
@@ -61,7 +54,7 @@ export const resolvers: Resolvers = {
 		registerGuardingAssignment: async (
 			_,
 			{ day, session },
-			{  token }
+			{ token }
 		) => {
 			// const { id } = verifyToken(token);
 			// const existinRegistrationOfThisUser = await dbClient
@@ -134,7 +127,7 @@ export const resolvers: Resolvers = {
 			// 	);
 
 			// return updated.value;
-			return null
+			return null;
 		},
 
 		trucLab: async (_, { day, session }, { token }) => {

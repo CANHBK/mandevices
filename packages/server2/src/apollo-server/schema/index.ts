@@ -8,6 +8,12 @@ import { merge } from "lodash";
 
 export const schema = makeExecutableSchema({
 	typeDefs: [deviceTypes, userTypes, guardTypes, postTypes],
+
 	// @ts-ignore
-	resolvers: merge(userResolver, deviceResolvers, guardResolver, postResolver)
+	resolvers: merge(
+		userResolver,
+		deviceResolvers,
+		guardResolver,
+		postResolver
+	)
 });

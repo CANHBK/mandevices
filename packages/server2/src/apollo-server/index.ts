@@ -5,12 +5,17 @@ import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
 import { applyMiddleware } from "graphql-middleware";
 import { schema } from "./schema";
 import { verify } from "jsonwebtoken";
+import { SchemaDirectiveVisitor } from "graphql-tools";
+import { TypeInfo, GraphQLField, GraphQLEnumValue } from "graphql";
 
-const getUser = async (req: ExpressContext) => {
+
+const getUser = (req: ExpressContext) => {
 	const token = req.req.headers.authorization;
-	if (!token) {
+
+	if (token === "null") {
 		return null;
 	}
+
 	const decodedToken = verify(token, process.env.JSON_WEB_TOKEN_SECRET!);
 
 	return decodedToken;
@@ -25,16 +30,24 @@ const permissions = shield({
 		users: isAdmin
 	}
 });
+``;
+
+export const SchemaAST = new TypeInfo(schema);
 
 export const getApolloServer = async () => {
 	return new ApolloServer({
-		schema: applyMiddleware(schema, permissions),
+		schema,
+		// schema: applyMiddleware(schema, permissions),
 		playground: true,
 		introspection: true,
 		context: request => {
-
 			return {
-				token: request.req.headers.authorization,
+				token:
+					request.req.headers.authorization ===
+					"null"
+						? null
+						: request.req.headers
+								.authorization,
 				user: getUser(request)
 			};
 		}
