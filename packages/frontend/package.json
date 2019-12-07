@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "run-p start:home start:administration",
+    "start": "run-p start:home start:administration start:user",
     "start:home": "ng serve home",
     "start:administration": "ng serve administration",
     "start:user": "ng serve user",

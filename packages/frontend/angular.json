@@ -148,7 +148,11 @@
             "aot": false,
             "assets": [
               "projects/home/src/favicon.ico",
-              "projects/home/src/assets"
+              "projects/home/src/assets",
+              "projects/home/src/css",
+              "projects/home/src/img",
+              "projects/home/src/js",
+              "projects/home/src/vendor"
             ],
             "styles": [
               "projects/home/src/styles.scss"
