@@ -271,7 +271,10 @@
             "aot": false,
             "assets": [
               "projects/user/src/favicon.ico",
-              "projects/user/src/assets"
+              "projects/user/src/assets",
+              "projects/user/src/css",
+              "projects/user/src/js",
+              "projects/user/src/scss"
             ],
             "styles": [
               "projects/user/src/styles.scss"
