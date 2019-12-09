@@ -25,7 +25,11 @@
             "aot": false,
             "assets": [
               "projects/administration/src/favicon.ico",
-              "projects/administration/src/assets"
+              "projects/administration/src/assets",
+              "projects/administration/src/css",
+              "projects/administration/src/img",
+              "projects/administration/src/js",
+              "projects/administration/src/vendor"
             ],
             "styles": [
               "projects/administration/src/styles.scss"
@@ -375,6 +379,41 @@
             "production": {
               "devServerTarget": "user:serve:production"
             }
+          }
+        }
+      }
+    },
+    "vendors": {
+      "projectType": "library",
+      "root": "projects/vendors",
+      "sourceRoot": "projects/vendors/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/vendors/tsconfig.lib.json",
+            "project": "projects/vendors/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/vendors/src/test.ts",
+            "tsConfig": "projects/vendors/tsconfig.spec.json",
+            "karmaConfig": "projects/vendors/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/vendors/tsconfig.lib.json",
+              "projects/vendors/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

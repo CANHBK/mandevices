@@ -16,8 +16,17 @@
     ],
     "lib": [
       "es2018",
-      "dom"
-    ]
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "paths": {
+      "vendors": [
+        "dist/vendors"
+      ],
+      "vendors/*": [
+        "dist/vendors/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

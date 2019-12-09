@@ -1,0 +1,21 @@
+<div
+		#authenticationArea
+		class="header-nav-feature header-nav-features-user d-inline-flex mx-2 pr-2 signin"
+		id="headerAccount"
+>
+	<a class="header-nav-features-toggle" (click)="onLoginToggle(authenticationForm)">
+		<i class="far fa-user"></i>Đăng nhập
+	</a>
+	<div
+            #authenticationForm
+            (clickOutside)="onClickOutSide(authenticationForm)"
+            [exclude]="'.header-nav-features-toggle'"
+			class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"
+			id="headerTopUserDropdown"
+	>
+		<app-login></app-login>
+		<app-register></app-register>
+		<app-recover></app-recover>
+	
+	</div>
+</div>
