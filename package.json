@@ -1,11 +1,15 @@
 {
   "private": true,
+  "engines": {
+    "yarn": "1.x"
+  },
   "scripts": {
     "i-server": "cd packages/server2 && npm i",
     "setup": "npx lerna bootstrap",
     "mobile": "cd packages/mobile && yarn start",
     "restart": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans",
     "dev": "docker-compose up --build",
+    "heroku-postbuild": "cd packages/server2 && yarn build",
     "st": "docker-compose -f docker-compose.staging.yml up --build",
     "stop:": "docker-compose stop",
     "postinstall": "npm run i-server"
