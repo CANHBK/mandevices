@@ -11,7 +11,7 @@ import { TypeInfo, GraphQLField, GraphQLEnumValue } from "graphql";
 
 const getUser = (req: ExpressContext) => {
 	const token = req.req.headers.authorization;
-
+console.log('token',token)
 	if (token === "null") {
 		return null;
 	}

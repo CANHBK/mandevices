@@ -7,7 +7,10 @@
     "start:home": "ng serve home",
     "start:administration": "ng serve administration",
     "start:user": "ng serve user",
-    "build": "ng build",
+    "build": "run-p build:home build:user build:administration",
+    "build:home": "ng build home --prod",
+    "build:user": "ng build user --prod",
+    "build:administration": "ng build administration --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

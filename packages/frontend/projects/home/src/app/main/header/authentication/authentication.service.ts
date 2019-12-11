@@ -6,6 +6,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 export class AuthenticationService {
     registerRedirect = new EventEmitter();
     loginRedirect = new EventEmitter();
+    login = new EventEmitter();
 
     constructor() {
     }

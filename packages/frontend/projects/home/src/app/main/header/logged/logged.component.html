@@ -1,0 +1,57 @@
+<div
+		class="header-nav-feature header-nav-features-user header-nav-features-user-logged d-inline-flex mx-2 pr-2"
+		id="headerAccount"
+>
+	<a id="toggleUserMenu" class="header-nav-features-toggle" (click)="onToggleUserMenu() " *ngIf="currentUser">
+		<i class="far fa-user"></i> {{currentUser.firstName}}
+	</a>
+	<div
+        #userMenu
+		(clickOutside)="onClickOutSideUserMenu()"
+		[excludeBeforeClick]="true"
+		[exclude]="'#toggleUserMenu'"
+		class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"
+		id="headerTopUserDropdown"
+	>
+		<div class="row">
+			<div class="col-8">
+				<p class="mb-0 pb-0 text-2 line-height-1 pt-1">
+					Hello,
+				</p>
+				<p *ngIf="currentUser">
+					<strong class="text-color-dark text-4"
+					>{{currentUser.firstName}}</strong
+					>
+				</p>
+			</div>
+			<div class="col-4">
+				<div class="d-flex justify-content-end">
+					<img
+							class="rounded-circle"
+							width="40"
+							height="40"
+							alt=""
+							src="img/avatars/avatar.jpg"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="row" *ngIf="currentUser">
+			<div class="col">
+				<ul class="nav nav-list-simple flex-column text-3">
+					<li class="nav-item">
+						<a class="nav-link" [href]="userUrl">Trang cá nhân</a>
+					</li>
+					<li class="nav-item" *ngIf="currentUser.role==Roles.MANAGER">
+						<a class="nav-link" [href]="dashboardUrl">Trang quản trị</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link border-bottom-0" (click)="onLogout()"
+						>Đăng xuất</a
+						>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

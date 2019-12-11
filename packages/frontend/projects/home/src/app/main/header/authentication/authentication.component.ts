@@ -9,6 +9,7 @@ import {AuthenticationService} from './authentication.service';
 export class AuthenticationComponent implements OnInit {
 
     @ViewChild('authenticationArea', {static: true}) authenticationArea: ElementRef;
+    @ViewChild('authenticationForm', {static: true}) authenticationForm: ElementRef;
 
     constructor(private authenticationService: AuthenticationService) {
     }
@@ -22,6 +23,7 @@ export class AuthenticationComponent implements OnInit {
             (this.authenticationArea.nativeElement as HTMLDivElement).classList.remove('signup');
             (this.authenticationArea.nativeElement as HTMLDivElement).classList.add('signin');
         });
+        this.authenticationService.login.subscribe(() => this.hideAuthenticationForm());
     }
 
     onLoginToggle = (element: HTMLDivElement) => {
@@ -32,6 +34,10 @@ export class AuthenticationComponent implements OnInit {
         if (element.classList.contains('show')) {
             element.classList.remove('show');
         }
+    };
+
+    hideAuthenticationForm = () => {
+        (this.authenticationForm.nativeElement as HTMLDivElement).classList.remove('show');
     };
 
 }

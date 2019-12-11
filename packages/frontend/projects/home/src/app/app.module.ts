@@ -15,6 +15,7 @@ import { PagesComponent } from './main/pages/pages.component';
 import { HomePageComponent } from './main/pages/home-page/home-page.component';
 import { SliderComponent } from './main/pages/home-page/slider/slider.component';
 import {VendorsModule} from '../../../vendors/src/lib/vendors.module';
+import { LoggedComponent } from './main/header/logged/logged.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import {VendorsModule} from '../../../vendors/src/lib/vendors.module';
         RecoverComponent,
         PagesComponent,
         HomePageComponent,
-        SliderComponent
+        SliderComponent,
+        LoggedComponent
     ],
     imports: [
         BrowserModule,

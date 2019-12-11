@@ -3575,7 +3575,10 @@
 						<div
 								class="header-nav-features header-nav-features-no-border header-nav-features-lg-show-border order-1 order-lg-2"
 						>
-							<app-authentication></app-authentication>
+							<app-authentication *ngIf="!currentUser;else userLogged"></app-authentication>
+							<ng-template #userLogged>
+								<app-logged></app-logged>
+							</ng-template>
 						</div>
 					</div>
 				</div>

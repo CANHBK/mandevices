@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from '../authentication.service';
 import {UserService} from '../../../../../../../vendors/src/lib/user.service';
 
@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
     };
 
     onLogin = () => {
-        this.userService.login(this.email, this.password).subscribe(data => console.log(data), error => console.log(error));
+        this.userService.login(this.email, this.password).subscribe(data => {
+            this.userService.getCurrentUser('network-only').subscribe();
+            this.authenticationService.login.emit();
+            console.log(data);
+        }, error => console.log(error));
     };
-
 }
