@@ -7,6 +7,11 @@ import { MainComponent } from './main/main.component';
 import { HeaderComponent } from './main/header/header.component';
 import { LeftSidebarComponent } from './main/left-sidebar/left-sidebar.component';
 import { PagesComponent } from './main/pages/pages.component';
+import { VendorsModule } from '@apis/vendors.module';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { AppModule as UiModule } from '../../../ui/src/app/app.module';
 
 @NgModule({
   declarations: [
@@ -14,13 +19,19 @@ import { PagesComponent } from './main/pages/pages.component';
     MainComponent,
     HeaderComponent,
     LeftSidebarComponent,
-    PagesComponent
+    PagesComponent,
+    AuthenticationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    VendorsModule,
+    AppRoutingModule,
+    FormsModule,
+    UiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

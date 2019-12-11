@@ -1,31 +1,36 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AuthenticationService} from '../authentication.service';
-import {UserService} from '../../../../../../../vendors/src/lib/user.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
+import { UserService } from '../../../../../../../vendors/src/lib/user.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
+  error: string;
 
-    constructor(private  authenticationService: AuthenticationService, private userService: UserService) {
-    }
+  constructor(private  authenticationService: AuthenticationService, private userService: UserService) {
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    onRegisterRedirect = () => {
-        this.authenticationService.registerRedirect.emit();
-    };
+  onRegisterRedirect = () => {
+    this.authenticationService.registerRedirect.emit();
+  };
 
-    onLogin = () => {
-        this.userService.login(this.email, this.password).subscribe(data => {
-            this.userService.getCurrentUser('network-only').subscribe();
-            this.authenticationService.login.emit();
-            console.log(data);
-        }, error => console.log(error));
-    };
+  onLogin = () => {
+    this.userService.login(this.email, this.password).subscribe(data => {
+      console.log('on data')
+      this.userService.getCurrentUser('network-only').subscribe();
+      this.authenticationService.login.emit();
+      console.log(data);
+    }, error => {
+      this.error = error.message;
+      console.log(error.message);
+    });
+  };
 }

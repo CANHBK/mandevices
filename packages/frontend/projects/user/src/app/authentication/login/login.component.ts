@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../../vendors/src/lib/user.service';
+import { UserService } from '@apis/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
+  error: string;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -18,8 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin = () => {
-    this.userService.login(this.email, this.password).subscribe(() => {
-      this.router.navigate(['/'])
-    });
-  };
+    this.userService.login(this.email, this.password).subscribe(() => this.router.navigate(['/']), error => this.error = error.message
+    )
+  }
+
 }

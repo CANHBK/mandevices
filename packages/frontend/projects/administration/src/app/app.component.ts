@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {UserService} from '../../../vendors/src/lib/user.service';
+import { UserService } from '@apis/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +7,10 @@ import {UserService} from '../../../vendors/src/lib/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'administration';
-  constructor(private userService: UserService) {
-    this.userService.getCurrentUser('network-only').subscribe(
-        user=>console.log('user in app',user)
-    );
+
+  constructor() {
+    // this.userService.getCurrentUser('network-only').subscribe(
+    //   user => console.log('user in app', user)
+    // );
   }
 }
