@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppModule as UiModule } from '../../../../projects/ui/src/app/app.module'
 import { AppRoutingModule } from './app-routing.module';
 import { ClickOutsideModule } from 'ng-click-outside';
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { PagesComponent } from './main/pages/pages.component';
 import { HomePageComponent } from './main/pages/home-page/home-page.component';
 import { SliderComponent } from './main/pages/home-page/slider/slider.component';
-import { VendorsModule } from '../../../vendors/src/lib/vendors.module';
+import { VendorsModule } from '@apis/vendors.module';
 import { LoggedComponent } from './main/header/logged/logged.component';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { LoggedComponent } from './main/header/logged/logged.component';
     LoggedComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     VendorsModule,
     FormsModule,

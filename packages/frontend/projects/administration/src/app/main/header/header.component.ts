@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
 export class HeaderComponent implements OnInit {
   currentUser: User;
   userUrl = environment.global.userUrl;
+  homeUrl = environment.global.homeUrl;
 
   constructor(private userService: UserService, private router: Router) {
   }

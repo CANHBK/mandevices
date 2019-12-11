@@ -6,6 +6,7 @@ import { applyMiddleware } from 'graphql-middleware';
 import { schema } from './schema';
 import { verify } from 'jsonwebtoken';
 import { TypeInfo, GraphQLField, GraphQLEnumValue } from 'graphql';
+import { userLoader } from '../database/controller/UserController';
 
 
 const getUser = (req: ExpressContext) => {
@@ -41,6 +42,9 @@ export const getApolloServer = async () => {
 		introspection: true,
 		context: request => {
 			return {
+				loaders:{
+					userLoader: userLoader()
+				},
 				token:
 					request.req.headers.authorization ===
 					'null'

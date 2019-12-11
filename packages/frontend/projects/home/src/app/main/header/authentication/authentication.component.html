@@ -1,21 +1,46 @@
 <div
-		#authenticationArea
-		class="header-nav-feature header-nav-features-user d-inline-flex mx-2 pr-2 signin"
-		id="headerAccount"
+  #authenticationArea
+  class="header-nav-feature header-nav-features-user d-inline-flex mx-2 pr-2 signin"
+  id="headerAccount"
 >
-	<a class="header-nav-features-toggle" (click)="onLoginToggle(authenticationForm)">
-		<i class="far fa-user"></i>Đăng nhập
-	</a>
-	<div
-            #authenticationForm
-            (clickOutside)="onClickOutSide(authenticationForm)"
-            [exclude]="'.header-nav-features-toggle'"
-			class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"
-			id="headerTopUserDropdown"
-	>
-		<app-login></app-login>
-		<app-register></app-register>
-		<app-recover></app-recover>
-	
-	</div>
+  <a class="header-nav-features-toggle" (click)="onLoginToggle(authenticationForm)">
+    <i class="far fa-user"></i>Đăng nhập
+  </a>
+  <div
+    #authenticationForm
+    (clickOutside)="onClickOutSide(authenticationForm)"
+    [exclude]="'.header-nav-features-toggle'"
+    class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed header-nav-features-dropdown-force-right"
+    id="headerTopUserDropdown"
+  >
+    <app-login></app-login>
+    <app-register></app-register>
+    <app-recover></app-recover>
+
+  </div>
+</div>
+
+<div class="modal fade" id="authenticationModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="defaultModalLabel">Thông báo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere
+          porta. Quisque ut nulla at nunc <a href="#">vehicula</a> lacinia. Proin adipiscing porta tellus, ut feugiat
+          nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in
+          faucibus.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere
+          porta. Quisque ut nulla at nunc <a href="#">vehicula</a> lacinia. Proin adipiscing porta tellus, ut feugiat
+          nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in
+          faucibus.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -336,8 +336,10 @@
               <li role="separator" class="divider"></li>
               <li *ngIf="currentUser.role==Roles.MANAGER"><a [href]="dashboardUrl"><i class="ti-settings"></i>Trang
                 quản trị</a></li>
+              <li><a [href]="homeUrl"><i class="fa fa-power-off"></i> Trang chủ</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="onLogout()"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+
             </ul>
           </div>
         </li>

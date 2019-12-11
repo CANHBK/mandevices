@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
   Roles = Roles;
   dashboardUrl = environment.global.dashboardUrl;
+  homeUrl = environment.global.homeUrl;
 
   constructor(private userService: UserService, private router: Router) {
   }

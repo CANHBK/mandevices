@@ -29,6 +29,7 @@ export interface User {
   firstName: string;
   fullName: string;
   email: string;
+  checked: boolean;
   role: Roles;
 }
 
@@ -87,6 +88,24 @@ export class UserService {
     });
   };
 
+  getAll = () => {
+    return new Observable<User[]>(observer => {
+      this.apollo.query({
+        query: gql`
+          query Users{
+            users{
+              id
+              fullName
+              email
+              checked
+            }
+          }
+        `
+      }).subscribe(({ data }) => {
+        observer.next((data as any).users)
+      })
+    })
+  }
 
   logout = () => {
     return new Observable((observer) => {
@@ -97,4 +116,20 @@ export class UserService {
       }).catch(error => observer.error(error));
     });
   };
-};
+
+  register = (email: string, password: string, fullName: string) => {
+    return new Observable(observer => {
+      this.apollo.mutate({
+        mutation: gql`
+          mutation Register($email: String!, $password: String!,$fullName: String!){
+            register(email:$email, password:$password,fullName: $fullName)
+          }
+        `,
+        variables: { email, password, fullName }
+      }).subscribe(({ data }) => {
+          observer.next(data);
+        }, error => observer.error(error)
+      )
+    })
+  };
+}

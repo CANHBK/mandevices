@@ -12,6 +12,10 @@ export default gql`
 		email: String
 		avatar: String
 		course: Int
+		
+		#Kiểm tra Email đã được xác thực hay chưa?
+		checked: Boolean!
+		
 		# Đường/Thôn thường trú
 		streetOrHamletResident: String
 		# Tỉnh/Thành phố thường trú

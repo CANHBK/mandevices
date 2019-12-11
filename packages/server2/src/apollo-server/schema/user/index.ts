@@ -14,6 +14,16 @@ export const resolvers = {
 				throw new Error("fullName is undefined");
 			const fullNameArray = parent.fullName.split(" ");
 			return fullNameArray[fullNameArray.length - 1];
+		},
+		checked:async (parent,_,{loaders:{userLoader}})=>{
+		const result = await userLoader.load((parent as any).id)
+		console.log('result in resolvers :', result[0]);
+		if(result[0].emailConfirmationToken){
+			return false
+		}else{
+			return true;
+		}
+		
 		}
 	},
 	Query: {

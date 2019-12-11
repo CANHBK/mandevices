@@ -1,6 +1,28 @@
 import { generateToken } from "../../utilities";
 import { dbClient } from "..";
-import { difference } from "lodash";
+import DataLoader from "dataloader";
+import {groupBy} from 'lodash'
+
+export const userLoader = () => {
+	return new DataLoader<number, any[]>(userIds=>getUsersByIds(userIds))
+}
+
+const getUsersByIds = async (userIds: readonly number[]) => {
+	try {
+		const [result] = await dbClient.query(
+			`
+				SELECT *
+				FROM user_account
+				WHERE id IN (?)
+			`,
+			[userIds]
+		)
+		const usersGroupById = groupBy(result,'id')
+		return userIds.map(userId=>usersGroupById[userId]||[])
+	} catch (error) {
+		throw new Error(error)
+	}
+}
 
 interface UserAccountCreateInput {
 	email: string;

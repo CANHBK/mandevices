@@ -1,9 +1,17 @@
 {
 	"dev": {
-        "host":"localhost",
+		"host": {
+			"ENV": "DB_HOST"
+		},
 		"driver": "mysql",
-		"user": "root",
-		"password": "Canhbkhn1",
-		"database": "test"
+		"user": {
+			"ENV": "DB_USERNAME"
+		},
+		"password": {
+			"ENV": "DB_PASSWORD"
+		},
+		"database": {
+			"ENV": "DB_NAME"
+		}
 	}
 }
