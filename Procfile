@@ -1,1 +1,1 @@
-web: node packages/server2/build/index.js
+web: cd packages/server2 && node build/index.js

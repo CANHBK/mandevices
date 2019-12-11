@@ -1,26 +1,24 @@
 {
-	"private": true,
-	"scripts": {
-		"i-server": "cd packages/server2 && npm i",
-		"react": "npx lerna run build",
-		"setup": "npx lerna bootstrap",
-		"mobile": "cd packages/mobile && yarn start",
-		"restart": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans",
-		"dev": "docker-compose up --build",
-		"st": "docker-compose -f docker-compose.staging.yml up --build",
-		"stop:": "docker-compose stop",
-		"build-ts": "lerna run build-ts",
-		"postinstall": "npm run i-server && npm run build-ts"
-	},
-	"devDependencies": {
-		"@types/react-router-dom": "4.3.5",
-		"lerna": "^3.16.4",
-		"npm-run-all": "^4.1.5",
-		"typescript": "^3.5.3"
-	},
-	"name": "mandevices",
-	"dependencies": {
-		"react-router-dom": "5.0.1",
-		"yup": "0.27.0"
-	}
+  "private": true,
+  "scripts": {
+    "i-server": "cd packages/server2 && npm i",
+    "setup": "npx lerna bootstrap",
+    "mobile": "cd packages/mobile && yarn start",
+    "restart": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans",
+    "dev": "docker-compose up --build",
+    "st": "docker-compose -f docker-compose.staging.yml up --build",
+    "stop:": "docker-compose stop",
+    "postinstall": "npm run i-server"
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "4.3.5",
+    "lerna": "^3.16.4",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.5.3"
+  },
+  "name": "mandevices",
+  "dependencies": {
+    "react-router-dom": "5.0.1",
+    "yup": "0.27.0"
+  }
 }
