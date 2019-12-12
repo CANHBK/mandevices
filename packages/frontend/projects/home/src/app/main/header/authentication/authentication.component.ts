@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-authentication',
@@ -10,8 +11,9 @@ export class AuthenticationComponent implements OnInit {
 
   @ViewChild('authenticationArea', { static: true }) authenticationArea: ElementRef;
   @ViewChild('authenticationForm', { static: true }) authenticationForm: ElementRef;
+  @ViewChild('content', { static: true }) modalContent: ElementRef;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -24,6 +26,11 @@ export class AuthenticationComponent implements OnInit {
       (this.authenticationArea.nativeElement as HTMLDivElement).classList.add('signin');
     });
     this.authenticationService.login.subscribe(() => this.hideAuthenticationForm());
+    this.authenticationService.register.subscribe(() => {
+      this.hideAuthenticationForm();
+      this.modalService.open(this.modalContent);
+    });
+
   }
 
   onLoginToggle = (element: HTMLDivElement) => {

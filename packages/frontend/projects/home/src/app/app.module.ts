@@ -17,6 +17,9 @@ import { HomePageComponent } from './main/pages/home-page/home-page.component';
 import { SliderComponent } from './main/pages/home-page/slider/slider.component';
 import { VendorsModule } from '@apis/vendors.module';
 import { LoggedComponent } from './main/header/logged/logged.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -33,13 +36,16 @@ import { LoggedComponent } from './main/header/logged/logged.component';
     LoggedComponent
   ],
   imports: [
+    MatButtonModule,
     NgbModule,
     BrowserModule,
     VendorsModule,
     FormsModule,
     ClickOutsideModule,
     AppRoutingModule,
-    UiModule
+    UiModule,
+    BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

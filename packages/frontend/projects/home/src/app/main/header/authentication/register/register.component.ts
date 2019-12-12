@@ -22,11 +22,15 @@ export class RegisterComponent implements OnInit {
 
   onRegister = () => {
     if (this.password !== this.rePassword) {
-      return this.error = 'Mật khẩu không khớp'
+      return this.error = 'Mật khẩu không khớp';
     }
-    this.userService.register(this.email, this.password, this.fullName).subscribe(data => console.log(data), error => {
+
+    this.userService.register(this.email, this.password, this.fullName).subscribe(data => {
+      this.authenticationService.register.emit();
+      console.log(data);
+    }, error => {
       this.error = error;
-    })
+    });
   }
   onLoginRedirect = () => {
     this.authenticationService.loginRedirect.emit();
