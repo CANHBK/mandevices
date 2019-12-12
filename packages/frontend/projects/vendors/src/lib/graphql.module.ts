@@ -1,51 +1,52 @@
-import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {ApolloModule, Apollo, APOLLO_OPTIONS} from 'apollo-angular';
-import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
-import {InMemoryCache} from 'apollo-cache-inmemory';
-import {ApolloLink} from 'apollo-link';
-import {setContext} from 'apollo-link-context';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloLink } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
+import { globalEnvironment } from '../../../../environments/environment';
 
-const uri = 'http://localhost:7000/graphql';
+const uri = globalEnvironment.serverUrl;
 
 export function provideApollo(httpLink: HttpLink) {
-    const basic = setContext((operation, context) => ({
-        headers: {
-            Accept: 'charset=utf-8'
-        }
-    }));
+  const basic = setContext((operation, context) => ({
+    headers: {
+      Accept: 'charset=utf-8'
+    }
+  }));
 
 
-    const auth = setContext((operation, context) => {
-        // Get the authentication token from local storage if it exists
-        const token = localStorage.getItem('token');
-        return {
-            headers: {
-                Authorization: `${token}`
-            },
-        };
-    });
-
-    const link = ApolloLink.from([basic, auth, httpLink.create({uri})]);
-    const cache = new InMemoryCache();
-
+  const auth = setContext((operation, context) => {
+    // Get the authentication token from local storage if it exists
+    const token = localStorage.getItem('token');
     return {
-        link,
-        cache
+      headers: {
+        Authorization: `${token}`
+      }
     };
+  });
+
+  const link = ApolloLink.from([basic, auth, httpLink.create({ uri })]);
+  const cache = new InMemoryCache();
+
+  return {
+    link,
+    cache
+  };
 }
 
 @NgModule({
-    exports: [
-        HttpClientModule,
-        ApolloModule,
-        HttpLinkModule
-    ],
-    providers: [{
-        provide: APOLLO_OPTIONS,
-        useFactory: provideApollo,
-        deps: [HttpLink]
-    }]
+  exports: [
+    HttpClientModule,
+    ApolloModule,
+    HttpLinkModule
+  ],
+  providers: [{
+    provide: APOLLO_OPTIONS,
+    useFactory: provideApollo,
+    deps: [HttpLink]
+  }]
 })
 export class GraphQLModule {
 }

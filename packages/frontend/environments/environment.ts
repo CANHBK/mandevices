@@ -4,6 +4,7 @@
 
 export const globalEnvironment = {
   production: false,
+  serverUrl: 'http://localhost:7000/graphql',
   homeUrl: 'http://localhost:4200',
   userUrl: 'http://localhost:4202',
   dashboardUrl: 'http://localhost:4201'
